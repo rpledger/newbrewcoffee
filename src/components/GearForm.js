@@ -146,6 +146,10 @@ class GearForm extends Component {
                 </FormControl>
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
+                    What do you want to brew?
+                </Typography>
+                <br /><br />
+                <Typography className={classes.title} variant="h4" noWrap>
                     What gear we recommend?
                 </Typography>
                 {this.scale()}
