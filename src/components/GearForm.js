@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = (theme) => ({
     formControl: {
@@ -19,8 +20,10 @@ class GearForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            scaleType: "",
-            kettleType: ""
+            scaleType: "None",
+            kettleType: "None",
+            grinderType: "None",
+            brewerType: "None"
         };
     }
 
@@ -32,6 +35,9 @@ class GearForm extends Component {
         const { classes } = this.props;
         return (
             <div>
+                <Typography className={classes.title} variant="h4" noWrap>
+                    What gear do you have?
+                </Typography>
                 <FormControl className={classes.formControl}>
                     <InputLabel id="demo-simple-select-label">Scale?</InputLabel>
                     <Select
@@ -61,7 +67,7 @@ class GearForm extends Component {
                         <MenuItem value={"Electric Kettle"}>Electric Kettle</MenuItem>
                         <MenuItem value={"Variable Temperature Kettle"}>Variable Temperature Kettle</MenuItem>
                         <MenuItem value={"Stovetop Gooseneck Kettle"}>Stovetop Gooseneck Kettle</MenuItem>
-                        <MenuItem value={"Electric Kettle"}>Electric Gooseneck Kettle</MenuItem>
+                        <MenuItem value={"Electric Gooseneck Kettle"}>Electric Gooseneck Kettle</MenuItem>
                     </Select>
                 </FormControl>
 
@@ -71,7 +77,7 @@ class GearForm extends Component {
                         labelId="demo-simple-select-label"
                         name="grinderType"
                         id="demo-simple-select"
-                        value={this.state.Type}
+                        value={this.state.grinderType}
                         onChange={this.handleChange.bind(this)}
                     >
                         <MenuItem value={"None"}>None</MenuItem>
@@ -88,10 +94,11 @@ class GearForm extends Component {
                         labelId="demo-simple-select-label"
                         name="brewerType"
                         id="demo-simple-select"
-                        value={this.state.Type}
+                        value={this.state.brewerType}
                         onChange={this.handleChange.bind(this)}
                     >
                         <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"Batch Brewer"}>Batch Brewer</MenuItem>
                         <MenuItem value={"French Press"}>French Press</MenuItem>
                         <MenuItem value={"Aeropress"}>Aeropress</MenuItem>
                         <MenuItem value={"Chemex"}>Chemex</MenuItem>
@@ -99,6 +106,7 @@ class GearForm extends Component {
                         <MenuItem value={"Hario v60"}>Hario v60</MenuItem>
                     </Select>
                 </FormControl>
+
             </div>
         );
     }
