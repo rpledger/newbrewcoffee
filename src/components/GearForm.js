@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withStyles} from "@material-ui/core/styles";
+import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -7,6 +8,9 @@ import Select from '@material-ui/core/Select';
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = (theme) => ({
+    root: {
+        padding: theme.spacing(10, 10)
+    },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
@@ -23,7 +27,8 @@ class GearForm extends Component {
             scaleType: "None",
             kettleType: "None",
             grinderType: "None",
-            brewerType: "None"
+            brewerType: "None",
+            coffeeBeanType: "None"
         };
     }
 
@@ -31,10 +36,26 @@ class GearForm extends Component {
         this.setState({ [e.target.name] : e.target.value });
     }
 
+    scale() {
+        if (this.state.scaleType === "None" || this.state.scaleType === "Kitchen Scale") {
+            return <div>A Tenth of a Gram Scale</div>;
+        }
+    }
+
+    kettle() {
+        if (this.state.kettleType === "None") {
+            return <div>Electric Kettle</div>;
+        } else if (this.state.kettleType === "Stovetop Kettle" || this.state.kettleType === "Electric Kettle") {
+            return <div>Hario Gooseneck Stovetop</div>
+        } else {
+            return <div>Baratza Encore</div>;
+        }
+    }
+
     render() {
         const { classes } = this.props;
         return (
-            <div>
+            <div className={classes.root}>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear do you have?
                 </Typography>
@@ -107,6 +128,28 @@ class GearForm extends Component {
                     </Select>
                 </FormControl>
 
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Coffee Beans?</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        name="coffeeBeanType"
+                        id="demo-simple-select"
+                        value={this.state.coffeeBeanType}
+                        onChange={this.handleChange.bind(this)}
+                    >
+                        <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"Store-Bought Pre-Ground"}>Store-Bought Pre-Ground</MenuItem>
+                        <MenuItem value={"Store-Bought Whole Bean"}>Store-Bought Whole Bean</MenuItem>
+                        <MenuItem value={"Local Coffee Shop Pre-Ground"}>Local Coffee Shop Pre-Ground</MenuItem>
+                        <MenuItem value={"Local Coffee Shop Whole Bean"}>Local Coffee Shop Whole Bean</MenuItem>
+                    </Select>
+                </FormControl>
+                <br /><br />
+                <Typography className={classes.title} variant="h4" noWrap>
+                    What gear we recommend?
+                </Typography>
+                {this.scale()}
+                {this.kettle()}
             </div>
         );
     }
