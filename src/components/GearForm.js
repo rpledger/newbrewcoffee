@@ -28,7 +28,11 @@ class GearForm extends Component {
             kettleType: "None",
             grinderType: "None",
             brewerType: "None",
-            coffeeBeanType: "None"
+            coffeeBeanType: "None",
+            timeOfDay: "None",
+            numOfDrinkers: "0",
+            cupsPerPerson: "0",
+            goals: "None"
         };
     }
 
@@ -146,8 +150,83 @@ class GearForm extends Component {
                 </FormControl>
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
-                    What do you want to brew?
+                    What's your current coffee routine?
                 </Typography>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Coffee Time?</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        name="timeOfDay"
+                        id="demo-simple-select"
+                        value={this.state.timeOfDay}
+                        onChange={this.handleChange.bind(this)}
+                    >
+                        <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"AM Only"}>AM Only</MenuItem>
+                        <MenuItem value={"AM/PM"}>AM/PM</MenuItem>
+                        <MenuItem value={"PM Only"}>PM Only</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Number of Drinkers?</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        name="numOfDrinkers"
+                        id="demo-simple-select"
+                        value={this.state.numOfDrinkers}
+                        onChange={this.handleChange.bind(this)}
+                    >
+                        <MenuItem value={"0"}>0</MenuItem>
+                        <MenuItem value={"1"}>1</MenuItem>
+                        <MenuItem value={"2"}>2</MenuItem>
+                        <MenuItem value={"3"}>3</MenuItem>
+                        <MenuItem value={"4+"}>4+</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Cups per drinker per day?</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        name="cupsPerPerson"
+                        id="demo-simple-select"
+                        value={this.state.cupsPerPerson}
+                        onChange={this.handleChange.bind(this)}
+                    >
+                        <MenuItem value={"0"}>0</MenuItem>
+                        <MenuItem value={"1"}>1</MenuItem>
+                        <MenuItem value={"2"}>2</MenuItem>
+                        <MenuItem value={"3"}>3</MenuItem>
+                        <MenuItem value={"4+"}>4+</MenuItem>
+                    </Select>
+                </FormControl>
+                {/*How many cups each a day?
+                How many coffee drinkers?
+                Would you consider a hand-grinder?
+                How do you like your coffee?
+                What about batch, cold brew and espresso?
+                */}
+                <br /><br />
+                <Typography className={classes.title} variant="h4" noWrap>
+                    What are your coffee dreams?
+                </Typography>
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-simple-select-label">Goals?</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        name="goals"
+                        id="demo-simple-select"
+                        value={this.state.goals}
+                        onChange={this.handleChange.bind(this)}
+                    >
+                        <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"Brew More Coffee at Once"}>Brew More Coffee at Once</MenuItem>
+                        <MenuItem value={"Brew Higher Quality Coffee"}>Brew Higher Quality Coffee</MenuItem>
+                        <MenuItem value={"Upgrade My Current Gear"}>Upgrade My Current Gear</MenuItem>
+                        <MenuItem value={"Entry Level Coffee Starter Gear"}>Entry Level Coffee Starter Gea</MenuItem>
+                        <MenuItem value={"Buy it for Life Gear"}>Buy it For Life Gear</MenuItem>
+                        <MenuItem value={"Explore New Coffee Techniques"}>Explore New Coffee Techniques</MenuItem>
+                    </Select>
+                </FormControl>
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear we recommend?
