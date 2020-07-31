@@ -6,8 +6,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from "@material-ui/core/Typography";
+import Input from '@material-ui/core/Input';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
-const useStyles = (theme) => ({
+
+const useStyles = (theme, name) => ({
     root: {
         padding: theme.spacing(10, 10)
     },
@@ -19,6 +23,29 @@ const useStyles = (theme) => ({
         marginTop: theme.spacing(2),
     },
 });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const brewerNames = [
+    'Batch Brewer',
+    'French Press',
+    'AeroPress',
+    'Chemex',
+    'Kalita Wave',
+    'Hario v60',
+    'Moka Pot',
+    'Cold Brew Device',
+    'Espresso Machine'
+];
 
 class GearForm extends Component {
     constructor(props){
@@ -32,7 +59,10 @@ class GearForm extends Component {
             timeOfDay: "None",
             numOfDrinkers: "0",
             cupsPerPerson: "0",
-            goals: "None"
+            currentBrewMethods: "None",
+            goals: "None",
+            brewerNames: [],
+            futureBrewerNames: []
         };
     }
 
@@ -114,21 +144,24 @@ class GearForm extends Component {
                 </FormControl>
 
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Brewer?</InputLabel>
+                    <InputLabel id="demo-mutiple-checkbox-label">Brewers?</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
-                        name="brewerType"
-                        id="demo-simple-select"
-                        value={this.state.brewerType}
+                        labelId="demo-mutiple-checkbox-label"
+                        id="demo-mutiple-checkbox"
+                        name="brewerNames"
+                        multiple
+                        value={this.state.brewerNames}
                         onChange={this.handleChange.bind(this)}
+                        input={<Input />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
                     >
-                        <MenuItem value={"None"}>None</MenuItem>
-                        <MenuItem value={"Batch Brewer"}>Batch Brewer</MenuItem>
-                        <MenuItem value={"French Press"}>French Press</MenuItem>
-                        <MenuItem value={"Aeropress"}>Aeropress</MenuItem>
-                        <MenuItem value={"Chemex"}>Chemex</MenuItem>
-                        <MenuItem value={"Kalita"}>Kalita</MenuItem>
-                        <MenuItem value={"Hario v60"}>Hario v60</MenuItem>
+                        {brewerNames.map((name) => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.brewerNames.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
 
@@ -219,14 +252,37 @@ class GearForm extends Component {
                         onChange={this.handleChange.bind(this)}
                     >
                         <MenuItem value={"None"}>None</MenuItem>
+                        <MenuItem value={"Entry Level Coffee Starter Gear"}>Entry Level Coffee Starter Gear</MenuItem>
                         <MenuItem value={"Brew More Coffee at Once"}>Brew More Coffee at Once</MenuItem>
                         <MenuItem value={"Brew Higher Quality Coffee"}>Brew Higher Quality Coffee</MenuItem>
                         <MenuItem value={"Upgrade My Current Gear"}>Upgrade My Current Gear</MenuItem>
-                        <MenuItem value={"Entry Level Coffee Starter Gear"}>Entry Level Coffee Starter Gea</MenuItem>
                         <MenuItem value={"Buy it for Life Gear"}>Buy it For Life Gear</MenuItem>
                         <MenuItem value={"Explore New Coffee Techniques"}>Explore New Coffee Techniques</MenuItem>
                     </Select>
                 </FormControl>
+
+                <FormControl className={classes.formControl}>
+                    <InputLabel id="demo-mutiple-checkbox-label">Brewers?</InputLabel>
+                    <Select
+                        labelId="demo-mutiple-checkbox-label"
+                        id="demo-mutiple-checkbox"
+                        name="futureBrewerNames"
+                        multiple
+                        value={this.state.futureBrewerNames}
+                        onChange={this.handleChange.bind(this)}
+                        input={<Input />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
+                    >
+                        {brewerNames.map((name) => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.futureBrewerNames.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear we recommend?
