@@ -47,20 +47,29 @@ const brewerNames = [
     'Espresso Machine'
 ];
 
+const goalNames = [
+    'Entry Level Coffee Starter Gear',
+    'Brew More Coffee at Once',
+    'Brew Higher Quality Coffee',
+    'Upgrade My Current Gear',
+    'Buy it for Life Gear',
+    'Explore New Coffee Techniques'
+];
+
 class GearForm extends Component {
     constructor(props){
         super(props);
         this.state = {
-            scaleType: "None",
-            kettleType: "None",
-            grinderType: "None",
-            brewerType: "None",
-            coffeeBeanType: "None",
-            timeOfDay: "None",
-            numOfDrinkers: "0",
-            cupsPerPerson: "0",
-            currentBrewMethods: "None",
-            goals: "None",
+            scaleType: "",
+            kettleType: "",
+            grinderType: "",
+            brewerType: "",
+            coffeeBeanType: "",
+            timeOfDay: "",
+            numOfDrinkers: "",
+            cupsPerPerson: "",
+            currentBrewMethods: "",
+            goals: [],
             brewerNames: [],
             futureBrewerNames: []
         };
@@ -243,21 +252,24 @@ class GearForm extends Component {
                     What are your coffee dreams?
                 </Typography>
                 <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Goals?</InputLabel>
+                    <InputLabel id="demo-mutiple-checkbox-label">Goals?</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
+                        labelId="demo-mutiple-checkbox-label"
+                        id="demo-mutiple-checkbox"
                         name="goals"
-                        id="demo-simple-select"
+                        multiple
                         value={this.state.goals}
                         onChange={this.handleChange.bind(this)}
+                        input={<Input />}
+                        renderValue={(selected) => selected.join(', ')}
+                        MenuProps={MenuProps}
                     >
-                        <MenuItem value={"None"}>None</MenuItem>
-                        <MenuItem value={"Entry Level Coffee Starter Gear"}>Entry Level Coffee Starter Gear</MenuItem>
-                        <MenuItem value={"Brew More Coffee at Once"}>Brew More Coffee at Once</MenuItem>
-                        <MenuItem value={"Brew Higher Quality Coffee"}>Brew Higher Quality Coffee</MenuItem>
-                        <MenuItem value={"Upgrade My Current Gear"}>Upgrade My Current Gear</MenuItem>
-                        <MenuItem value={"Buy it for Life Gear"}>Buy it For Life Gear</MenuItem>
-                        <MenuItem value={"Explore New Coffee Techniques"}>Explore New Coffee Techniques</MenuItem>
+                        {goalNames.map((name) => (
+                            <MenuItem key={name} value={name}>
+                                <Checkbox checked={this.state.goals.indexOf(name) > -1} />
+                                <ListItemText primary={name} />
+                            </MenuItem>
+                        ))}
                     </Select>
                 </FormControl>
 
