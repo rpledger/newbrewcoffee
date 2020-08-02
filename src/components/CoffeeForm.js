@@ -158,11 +158,22 @@ class CoffeeForm extends Component {
                 );
             case 1:
                 return(
-                    <CurrentRoutineForm />
+                    <CurrentRoutineForm
+                        timeOfDay={this.state.timeOfDay}
+                        numOfDrinkers={this.state.numOfDrinkers}
+                        cupsPerPerson={this.state.cupsPerPerson}
+                        currentBrewMethods={this.state.currentBrewMethods}
+                        handleChange={this.handleChange}
+                    />
                 );
             case 2:
                 return(
-                    <CoffeeGoalsForm />
+                    <CoffeeGoalsForm
+                        goals={this.state.goals}
+                        brewerNames={this.state.brewerNames}
+                        futureBrewerNames={this.state.futureBrewerNames}
+                        handleChange={this.handleChange}
+                    />
                 );
             default:
                 return(

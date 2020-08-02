@@ -95,25 +95,9 @@ class CoffeeGoalsForm extends Component {
         };
     }
 
-    handleChange(e) {
-        this.setState({ [e.target.name] : e.target.value });
-    }
-
-    scale() {
-        if (this.state.scaleType === "None" || this.state.scaleType === "Kitchen Scale") {
-            return <div>A Tenth of a Gram Scale</div>;
-        }
-    }
-
-    kettle() {
-        if (this.state.kettleType === "None") {
-            return <div>Electric Kettle</div>;
-        } else if (this.state.kettleType === "Stovetop Kettle" || this.state.kettleType === "Electric Kettle") {
-            return <div>Hario Gooseneck Stovetop</div>
-        } else {
-            return <div>Baratza Encore</div>;
-        }
-    }
+    // handleChange(e) {
+    //     this.setState({ [e.target.name] : e.target.value });
+    // }
 
     render() {
         const { classes } = this.props;
@@ -131,15 +115,15 @@ class CoffeeGoalsForm extends Component {
                                 id="demo-mutiple-checkbox"
                                 name="goals"
                                 multiple
-                                value={this.state.goals}
-                                onChange={this.handleChange.bind(this)}
+                                value={this.props.goals}
+                                onChange={this.props.handleChange}
                                 input={<Input />}
                                 renderValue={(selected) => selected.join(', ')}
                                 MenuProps={MenuProps}
                             >
                                 {goalNames.map((name) => (
                                     <MenuItem key={name} value={name}>
-                                        <Checkbox checked={this.state.goals.indexOf(name) > -1} />
+                                        <Checkbox checked={this.props.goals.indexOf(name) > -1} />
                                         <ListItemText primary={name} />
                                     </MenuItem>
                                 ))}
@@ -153,15 +137,15 @@ class CoffeeGoalsForm extends Component {
                                 id="demo-mutiple-checkbox"
                                 name="futureBrewerNames"
                                 multiple
-                                value={this.state.futureBrewerNames}
-                                onChange={this.handleChange.bind(this)}
+                                value={this.props.futureBrewerNames}
+                                onChange={this.props.handleChange}
                                 input={<Input />}
                                 renderValue={(selected) => selected.join(', ')}
                                 MenuProps={MenuProps}
                             >
                                 {brewerNames.map((name) => (
                                     <MenuItem key={name} value={name}>
-                                        <Checkbox checked={this.state.futureBrewerNames.indexOf(name) > -1} />
+                                        <Checkbox checked={this.props.futureBrewerNames.indexOf(name) > -1} />
                                         <ListItemText primary={name} />
                                     </MenuItem>
                                 ))}

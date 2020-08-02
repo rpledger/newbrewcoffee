@@ -95,25 +95,9 @@ class CurrentRoutineForm extends Component {
         };
     }
 
-    handleChange(e) {
-        this.setState({ [e.target.name] : e.target.value });
-    }
-
-    scale() {
-        if (this.state.scaleType === "None" || this.state.scaleType === "Kitchen Scale") {
-            return <div>A Tenth of a Gram Scale</div>;
-        }
-    }
-
-    kettle() {
-        if (this.state.kettleType === "None") {
-            return <div>Electric Kettle</div>;
-        } else if (this.state.kettleType === "Stovetop Kettle" || this.state.kettleType === "Electric Kettle") {
-            return <div>Hario Gooseneck Stovetop</div>
-        } else {
-            return <div>Baratza Encore</div>;
-        }
-    }
+    // handleChange(e) {
+    //     this.setState({ [e.target.name] : e.target.value });
+    // }
 
     render() {
         const { classes } = this.props;
@@ -130,8 +114,8 @@ class CurrentRoutineForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="timeOfDay"
                                 id="demo-simple-select"
-                                value={this.state.timeOfDay}
-                                onChange={this.handleChange.bind(this)}
+                                value={this.props.timeOfDay}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"AM Only"}>AM Only</MenuItem>
@@ -145,8 +129,8 @@ class CurrentRoutineForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="numOfDrinkers"
                                 id="demo-simple-select"
-                                value={this.state.numOfDrinkers}
-                                onChange={this.handleChange.bind(this)}
+                                value={this.props.numOfDrinkers}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"0"}>0</MenuItem>
                                 <MenuItem value={"1"}>1</MenuItem>
@@ -161,8 +145,8 @@ class CurrentRoutineForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="cupsPerPerson"
                                 id="demo-simple-select"
-                                value={this.state.cupsPerPerson}
-                                onChange={this.handleChange.bind(this)}
+                                value={this.props.cupsPerPerson}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"0"}>0</MenuItem>
                                 <MenuItem value={"1"}>1</MenuItem>
