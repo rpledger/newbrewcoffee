@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import Intro from './components/Intro';
 import GearForm from "./components/GearForm";
-import Stepper from "./components/Stepper";
+import CoffeeForm from "./components/CoffeeForm";
 
 class App extends Component {
   constructor(props){
@@ -16,7 +16,7 @@ class App extends Component {
         <div>
           <NavBar />
           {/*<Intro />*/}
-          <Stepper />
+          <CoffeeForm />
         </div>
     );
   }
