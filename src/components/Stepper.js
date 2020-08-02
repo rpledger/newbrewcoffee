@@ -5,6 +5,10 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import CurrentGearForm from "./CurrentGearForm";
+import CurrentRoutineForm from "./CurrentRoutineForm";
+import CoffeeGoalsForm from "./CoffeeGoalsForm";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -26,13 +30,23 @@ function getSteps() {
 function getStepContent(step) {
     switch (step) {
         case 0:
-            return 'What coffee gear do you have?';
+            return(
+                <CurrentGearForm />
+            );
         case 1:
-            return 'What is your current coffee routine?';
+            return(
+                <CurrentRoutineForm />
+            );
         case 2:
-            return 'What are your coffee goals';
+            return(
+                <CoffeeGoalsForm />
+            );
         default:
-            return 'Unknown step';
+            return(
+                <div>
+                    Unknown step
+                </div>
+            );
     }
 }
 
@@ -115,7 +129,12 @@ export default function HorizontalLinearStepper() {
                     </div>
                 ) : (
                     <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                        {/*<Typography className={classes.instructions}>*/}
+                        {/*    Hello*/}
+                        {/*</Typography>*/}
+                        <div>
+                            {getStepContent(activeStep)}
+                        </div>
                         <div>
                             <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                 Back

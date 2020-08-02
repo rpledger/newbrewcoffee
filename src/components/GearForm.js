@@ -11,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 import Stepper from "./Stepper";
+import CurrentGearForm from "./CurrentGearForm";
 
 
 const useStyles = (theme, name) => ({
@@ -119,6 +120,7 @@ class GearForm extends Component {
         return (
             <div className={classes.root}>
                 <Stepper />
+
                 <div className={classes.allForms}>
                 <div className={classes.formGroup}>
                 <Typography className={classes.title} variant="h4" noWrap>
