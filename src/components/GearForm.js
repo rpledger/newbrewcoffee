@@ -10,6 +10,8 @@ import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import Stepper from "./Stepper";
+
 
 const useStyles = (theme, name) => ({
     root: {
@@ -27,7 +29,7 @@ const useStyles = (theme, name) => ({
     formControl: {
         // margin: theme.spacing(1),
         // minWidth: 120,
-        width: '70%',
+        width: '80%',
     },
     formGroup: {
         margin: theme.spacing(2)
@@ -116,6 +118,7 @@ class GearForm extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
+                <Stepper />
                 <div className={classes.allForms}>
                 <div className={classes.formGroup}>
                 <Typography className={classes.title} variant="h4" noWrap>
