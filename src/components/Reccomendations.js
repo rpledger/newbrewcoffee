@@ -53,6 +53,86 @@ const MenuProps = {
     },
 };
 
+const brewMap = {
+    "batch": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["None", "Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Batch Brewer"
+    },
+    "frenchPress": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "French Press"
+    },
+    "aeroPress": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "AeroPress"
+    },
+    "chemex": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Chemex"
+    },
+    "kalitaWave": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Kalita Wave"
+    },
+    "harioV60": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Hario v60"
+    },
+    "mokaPot": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Moka Pot"
+    },
+    "coldBrew": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        brewerType: "Cold Brew Device"
+    },
+    "espressoMachine": {
+        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
+        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
+        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >120"],
+        brewerType: "Espresso Machine"
+    }
+}
+
+const brewTypes = [
+    "batch",
+    "frenchPress",
+    "aeroPress",
+    "chemex",
+    "kalitaWave",
+    "harioV60",
+    "mokaPot",
+    "coldBrew",
+    "espressoMachine"
+]
+
+function canBrew(type, scale, kettle, grinder, brewerType) {
+    console.log(type)
+    console.log(brewMap[type].scale)
+    if(
+        brewMap[type].scale.includes(scale) &&
+        brewMap[type].kettle.includes(kettle) &&
+        brewMap[type].grinder.includes(grinder) &&
+        brewerType.includes(brewMap[type].brewerType)
+    ) return( <p>{brewMap[type].brewerType}</p> )
+}
+
 class Reccomendations extends Component {
     constructor(props){
         super(props);
@@ -77,6 +157,7 @@ class Reccomendations extends Component {
                     What can I brew now?
                 </Typography>
                 <div>
+                    {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes))}
                 </div>
             </div>
         );
