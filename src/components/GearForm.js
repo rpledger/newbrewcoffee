@@ -13,11 +13,20 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const useStyles = (theme, name) => ({
     root: {
-        padding: theme.spacing(10, 10)
+        // padding: theme.spacing(10, 10),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        // width: '60%',
+        textAlign: 'center',
+        margin: '5% 0',
+        minHeight: '200px'
     },
     formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
+        // margin: theme.spacing(1),
+        // minWidth: 120,
+        width: '70%',
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -99,6 +108,7 @@ class GearForm extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
+                <div>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear do you have?
                 </Typography>
@@ -190,6 +200,8 @@ class GearForm extends Component {
                         <MenuItem value={"Local Coffee Shop Whole Bean"}>Local Coffee Shop Whole Bean</MenuItem>
                     </Select>
                 </FormControl>
+                </div>
+                <div>
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
                     What's your current coffee routine?
@@ -247,6 +259,8 @@ class GearForm extends Component {
                 How do you like your coffee?
                 What about batch, cold brew and espresso?
                 */}
+                </div>
+                <div>
                 <br /><br />
                 <Typography className={classes.title} variant="h4" noWrap>
                     What are your coffee dreams?
@@ -294,13 +308,16 @@ class GearForm extends Component {
                         ))}
                     </Select>
                 </FormControl>
+                </div>
 
                 <br /><br />
+                <div>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear we recommend?
                 </Typography>
                 {this.scale()}
                 {this.kettle()}
+                </div>
             </div>
         );
     }
