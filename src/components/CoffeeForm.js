@@ -84,6 +84,11 @@ class CoffeeForm extends Component {
         this.handleBack = this.handleBack.bind(this);
         this.handleSkip = this.handleSkip.bind(this);
         this.getStepContent = this.getStepContent.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(e) {
+        this.setState({ [e.target.name] : e.target.value });
     }
 
     setActiveStep(value) {
@@ -148,6 +153,7 @@ class CoffeeForm extends Component {
                         grinderType={this.state.grinderType}
                         brewerTypes={this.state.brewerTypes}
                         coffeeBeanType={this.state.coffeeBeanType}
+                        handleChange={this.handleChange}
                     />
                 );
             case 1:

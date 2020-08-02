@@ -87,9 +87,9 @@ class CurrentGearForm extends Component {
         };
     }
 
-    handleChange(e) {
-        this.setState({ [e.target.name] : e.target.value });
-    }
+    // handleChange(e) {
+    //     this.setState({ [e.target.name] : e.target.value });
+    // }
 
     render() {
         const { classes } = this.props;
@@ -107,7 +107,7 @@ class CurrentGearForm extends Component {
                                 name="scaleType"
                                 id="demo-simple-select"
                                 value={this.props.scaleType}
-                                onChange={this.handleChange.bind(this)}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"Kitchen Scale"}>Kitchen Scale</MenuItem>
@@ -122,7 +122,7 @@ class CurrentGearForm extends Component {
                                 name="kettleType"
                                 id="demo-simple-select"
                                 value={this.props.kettleType}
-                                onChange={this.handleChange.bind(this)}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"Stovetop Kettle"}>Stovetop Kettle</MenuItem>
@@ -140,7 +140,7 @@ class CurrentGearForm extends Component {
                                 name="grinderType"
                                 id="demo-simple-select"
                                 value={this.props.grinderType}
-                                onChange={this.handleChange.bind(this)}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"Blade Grinder"}>Blade Grinder</MenuItem>
@@ -158,7 +158,7 @@ class CurrentGearForm extends Component {
                                 name="brewerTypes"
                                 multiple
                                 value={this.props.brewerTypes}
-                                onChange={this.handleChange.bind(this)}
+                                onChange={this.props.handleChange}
                                 input={<Input />}
                                 renderValue={(selected) => selected.join(', ')}
                                 MenuProps={MenuProps}
@@ -179,7 +179,7 @@ class CurrentGearForm extends Component {
                                 name="coffeeBeanType"
                                 id="demo-simple-select"
                                 value={this.props.coffeeBeanType}
-                                onChange={this.handleChange.bind(this)}
+                                onChange={this.props.handleChange}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"Store-Bought Pre-Ground"}>Store-Bought Pre-Ground</MenuItem>
