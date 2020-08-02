@@ -27,28 +27,33 @@ function getSteps() {
     return ['Current Gear', 'Current Routine', 'Coffee Goals'];
 }
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return(
-                <CurrentGearForm />
-            );
-        case 1:
-            return(
-                <CurrentRoutineForm />
-            );
-        case 2:
-            return(
-                <CoffeeGoalsForm />
-            );
-        default:
-            return(
-                <div>
-                    Unknown step
-                </div>
-            );
-    }
-}
+// function getStepContent(step) {
+//     switch (step) {f
+//         case 0:
+//             return(
+//                 <CurrentGearForm
+//                     scaleType={this.state.scaleType}
+//                     kettleType={this.state.kettleType}
+//                     grinderType={this.state.brewerType}
+//                     coffeeBeanType={this.state.coffeeBeanType}
+//                 />
+//             );
+//         case 1:
+//             return(
+//                 <CurrentRoutineForm />
+//             );
+//         case 2:
+//             return(
+//                 <CoffeeGoalsForm />
+//             );
+//         default:
+//             return(
+//                 <div>
+//                     Unknown step
+//                 </div>
+//             );
+//     }
+// }
 
 // export default function HorizontalLinearStepper() {
 class CoffeeForm extends Component {
@@ -60,7 +65,7 @@ class CoffeeForm extends Component {
             scaleType: "",
             kettleType: "",
             grinderType: "",
-            brewerType: "",
+            brewerTypes: [],
             coffeeBeanType: "",
             timeOfDay: "",
             numOfDrinkers: "",
@@ -78,6 +83,7 @@ class CoffeeForm extends Component {
         this.handleNext = this.handleNext.bind(this);
         this.handleBack = this.handleBack.bind(this);
         this.handleSkip = this.handleSkip.bind(this);
+        this.getStepContent = this.getStepContent.bind(this);
     }
 
     setActiveStep(value) {
@@ -132,6 +138,35 @@ class CoffeeForm extends Component {
         this.setActiveStep(0);
     };
 
+    getStepContent(step) {
+        switch (step) {
+            case 0:
+                return(
+                    <CurrentGearForm
+                        scaleType={this.state.scaleType}
+                        kettleType={this.state.kettleType}
+                        grinderType={this.state.grinderType}
+                        brewerTypes={this.state.brewerTypes}
+                        coffeeBeanType={this.state.coffeeBeanType}
+                    />
+                );
+            case 1:
+                return(
+                    <CurrentRoutineForm />
+                );
+            case 2:
+                return(
+                    <CoffeeGoalsForm />
+                );
+            default:
+                return(
+                    <div>
+                        Unknown step
+                    </div>
+                );
+        }
+    }
+
     render() {
         const { classes } = this.props;
         const steps = getSteps()
@@ -170,7 +205,7 @@ class CoffeeForm extends Component {
                             {/*    Hello*/}
                             {/*</Typography>*/}
                             <div>
-                                {getStepContent(this.state.activeStep)}
+                                {this.getStepContent(this.state.activeStep)}
                             </div>
                             <div>
                                 <Button disabled={this.state.activeStep === 0} onClick={this.handleBack} className={classes.button}>

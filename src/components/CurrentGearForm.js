@@ -91,22 +91,6 @@ class CurrentGearForm extends Component {
         this.setState({ [e.target.name] : e.target.value });
     }
 
-    scale() {
-        if (this.state.scaleType === "None" || this.state.scaleType === "Kitchen Scale") {
-            return <div>A Tenth of a Gram Scale</div>;
-        }
-    }
-
-    kettle() {
-        if (this.state.kettleType === "None") {
-            return <div>Electric Kettle</div>;
-        } else if (this.state.kettleType === "Stovetop Kettle" || this.state.kettleType === "Electric Kettle") {
-            return <div>Hario Gooseneck Stovetop</div>
-        } else {
-            return <div>Baratza Encore</div>;
-        }
-    }
-
     render() {
         const { classes } = this.props;
         return (
@@ -122,7 +106,7 @@ class CurrentGearForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="scaleType"
                                 id="demo-simple-select"
-                                value={this.state.scaleType}
+                                value={this.props.scaleType}
                                 onChange={this.handleChange.bind(this)}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
@@ -137,7 +121,7 @@ class CurrentGearForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="kettleType"
                                 id="demo-simple-select"
-                                value={this.state.kettleType}
+                                value={this.props.kettleType}
                                 onChange={this.handleChange.bind(this)}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
@@ -155,7 +139,7 @@ class CurrentGearForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="grinderType"
                                 id="demo-simple-select"
-                                value={this.state.grinderType}
+                                value={this.props.grinderType}
                                 onChange={this.handleChange.bind(this)}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
@@ -173,7 +157,7 @@ class CurrentGearForm extends Component {
                                 id="demo-mutiple-checkbox"
                                 name="brewerTypes"
                                 multiple
-                                value={this.state.brewerTypes}
+                                value={this.props.brewerTypes}
                                 onChange={this.handleChange.bind(this)}
                                 input={<Input />}
                                 renderValue={(selected) => selected.join(', ')}
@@ -181,7 +165,7 @@ class CurrentGearForm extends Component {
                             >
                                 {brewerNames.map((name) => (
                                     <MenuItem key={name} value={name}>
-                                        <Checkbox checked={this.state.brewerTypes.indexOf(name) > -1} />
+                                        <Checkbox checked={this.props.brewerTypes.indexOf(name) > -1} />
                                         <ListItemText primary={name} />
                                     </MenuItem>
                                 ))}
@@ -194,7 +178,7 @@ class CurrentGearForm extends Component {
                                 labelId="demo-simple-select-label"
                                 name="coffeeBeanType"
                                 id="demo-simple-select"
-                                value={this.state.coffeeBeanType}
+                                value={this.props.coffeeBeanType}
                                 onChange={this.handleChange.bind(this)}
                             >
                                 <MenuItem value={"None"}>None</MenuItem>
