@@ -122,13 +122,21 @@ const brewTypes = [
     "espressoMachine"
 ]
 
-function canBrew(type, scale, kettle, grinder, brewerType) {
+function noGrinderPreGround(brewerType, grinder, coffeeType) {
+    return (grinder === "None" && (
+        ((brewerType !== "espressoMachine") && (coffeeType === "Store-Bought Pre-Ground")) ||
+        coffeeType === "Local Coffee Shop Pre-Ground" ))
+}
+
+function canBrew(type, scale, kettle, grinder, brewerType, coffeeType) {
     console.log(type)
     console.log(brewMap[type].scale)
     if(
         brewMap[type].scale.includes(scale) &&
         brewMap[type].kettle.includes(kettle) &&
-        brewMap[type].grinder.includes(grinder) &&
+        (brewMap[type].grinder.includes(grinder) ||
+            noGrinderPreGround(type, grinder, coffeeType)
+        ) &&
         brewerType.includes(brewMap[type].brewerType)
     ) return( <p>{brewMap[type].brewerType}</p> )
 }
@@ -157,7 +165,7 @@ class Reccomendations extends Component {
                     What can I brew now?
                 </Typography>
                 <div>
-                    {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes))}
+                    {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes, this.props.coffeeBeanType))}
                 </div>
             </div>
         );
