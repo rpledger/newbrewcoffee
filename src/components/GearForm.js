@@ -21,12 +21,20 @@ const useStyles = (theme, name) => ({
         // width: '60%',
         textAlign: 'center',
         margin: '5% 0',
-        minHeight: '200px'
+        minHeight: '200px',
+        // backgroundColor: 'blue'
     },
     formControl: {
         // margin: theme.spacing(1),
         // minWidth: 120,
         width: '70%',
+    },
+    formGroup: {
+        margin: theme.spacing(2)
+        // backgroundColor: 'red'
+    },
+    allForms: {
+        // backgroundColor: 'yellow'
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -108,7 +116,8 @@ class GearForm extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
-                <div>
+                <div className={classes.allForms}>
+                <div className={classes.formGroup}>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What gear do you have?
                 </Typography>
@@ -201,8 +210,8 @@ class GearForm extends Component {
                     </Select>
                 </FormControl>
                 </div>
-                <div>
                 <br /><br />
+                <div className={classes.formGroup}>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What's your current coffee routine?
                 </Typography>
@@ -260,8 +269,8 @@ class GearForm extends Component {
                 What about batch, cold brew and espresso?
                 */}
                 </div>
-                <div>
                 <br /><br />
+                <div className={classes.formGroup}>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What are your coffee dreams?
                 </Typography>
@@ -308,6 +317,7 @@ class GearForm extends Component {
                         ))}
                     </Select>
                 </FormControl>
+                </div>
                 </div>
 
                 <br /><br />
