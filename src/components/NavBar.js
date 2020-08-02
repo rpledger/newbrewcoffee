@@ -7,10 +7,34 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+
+import { createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#f9683a',
+            main: '#7A4938',
+            dark: '#870000',
+            contrastText: '#ffffff',
+        },
+        secondary: {
+            light: '#b6ffff',
+            main: '#81d4fa',
+            dark: '#4ba3c7',
+            contrastText: '#000000',
+        },
+    },
+});
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
+        color: 'primary',
+    },
+    appBar: {
+        color: 'primary',
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -64,11 +88,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavBar() {
-    const classes = useStyles();
+    const classes = useStyles(theme);
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <MuiThemeProvider theme={theme}>
+            <AppBar position="static" className={classes.appBar} color="primary">
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -96,6 +121,7 @@ export default function NavBar() {
                     </div>
                 </Toolbar>
             </AppBar>
+            </MuiThemeProvider>
         </div>
     );
 }

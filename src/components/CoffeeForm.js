@@ -8,7 +8,25 @@ import Typography from '@material-ui/core/Typography';
 import CurrentGearForm from "./CurrentGearForm";
 import CurrentRoutineForm from "./CurrentRoutineForm";
 import CoffeeGoalsForm from "./CoffeeGoalsForm";
+import { createMuiTheme } from '@material-ui/core/styles';
+import Reccomendations from "./Reccomendations";
 
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#f9683a',
+            main: '#bf360c',
+            dark: '#870000',
+            contrastText: '#ffffff',
+        },
+        secondary: {
+            light: '#b6ffff',
+            main: '#81d4fa',
+            dark: '#4ba3c7',
+            contrastText: '#000000',
+        },
+    },
+});
 
 const useStyles = (theme) => ({
     root: {
@@ -27,35 +45,6 @@ function getSteps() {
     return ['Current Gear', 'Current Routine', 'Coffee Goals'];
 }
 
-// function getStepContent(step) {
-//     switch (step) {f
-//         case 0:
-//             return(
-//                 <CurrentGearForm
-//                     scaleType={this.state.scaleType}
-//                     kettleType={this.state.kettleType}
-//                     grinderType={this.state.brewerType}
-//                     coffeeBeanType={this.state.coffeeBeanType}
-//                 />
-//             );
-//         case 1:
-//             return(
-//                 <CurrentRoutineForm />
-//             );
-//         case 2:
-//             return(
-//                 <CoffeeGoalsForm />
-//             );
-//         default:
-//             return(
-//                 <div>
-//                     Unknown step
-//                 </div>
-//             );
-//     }
-// }
-
-// export default function HorizontalLinearStepper() {
 class CoffeeForm extends Component {
     constructor(props){
         super(props);
@@ -209,9 +198,16 @@ class CoffeeForm extends Component {
                 <div>
                     {this.state.activeStep === steps.length ? (
                         <div>
-                            <Typography className={classes.instructions}>
-                                All steps completed - you&apos;re finished
-                            </Typography>
+                            <Reccomendations
+                                scaleType={this.state.scaleType}
+                                kettleType={this.state.kettleType}
+                                grinderType={this.state.grinderType}
+                                brewerTypes={this.state.brewerTypes}
+                                coffeeBeanType={this.state.coffeeBeanType}
+                            />
+                            {/*<Typography className={classes.instructions}>*/}
+                            {/*    All steps completed - you&apos;re finished*/}
+                            {/*</Typography>*/}
                             <Button onClick={this.handleReset} className={classes.button}>
                                 Reset
                             </Button>
@@ -256,4 +252,4 @@ class CoffeeForm extends Component {
     }
 }
 
-export default withStyles(useStyles, { withTheme: true })(CoffeeForm);
+export default withStyles(useStyles(theme), { withTheme: true })(CoffeeForm);

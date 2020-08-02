@@ -9,9 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-
-import Stepper from "./CoffeeForm";
-
+import Tooltip from '@material-ui/core/Tooltip';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 
 const useStyles = (theme, name) => ({
     root: {
@@ -98,35 +97,36 @@ class CurrentGearForm extends Component {
                         </Typography>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Scale?</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                name="scaleType"
-                                id="demo-simple-select"
-                                value={this.props.scaleType}
-                                onChange={this.props.handleChange}
-                            >
-                                <MenuItem value={"None"}>None</MenuItem>
-                                <MenuItem value={"Kitchen Scale"}>Kitchen Scale</MenuItem>
-                                <MenuItem value={"Tenth of a Gram Scale"}>Tenth of a Gram Scale</MenuItem>
-                            </Select>
+
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    name="scaleType"
+                                    id="demo-simple-select"
+                                    value={this.props.scaleType}
+                                    onChange={this.props.handleChange}
+                                >
+                                    <MenuItem value={"None"}>None</MenuItem>
+                                    <MenuItem value={"Kitchen Scale"}>Kitchen Scale</MenuItem>
+                                    <MenuItem value={"Tenth of a Gram Scale"}>Tenth of a Gram Scale</MenuItem>
+                                </Select>
                         </FormControl>
 
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Kettle?</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                name="kettleType"
-                                id="demo-simple-select"
-                                value={this.props.kettleType}
-                                onChange={this.props.handleChange}
-                            >
-                                <MenuItem value={"None"}>None</MenuItem>
-                                <MenuItem value={"Stovetop Kettle"}>Stovetop Kettle</MenuItem>
-                                <MenuItem value={"Electric Kettle"}>Electric Kettle</MenuItem>
-                                <MenuItem value={"Variable Temperature Kettle"}>Variable Temperature Kettle</MenuItem>
-                                <MenuItem value={"Stovetop Gooseneck Kettle"}>Stovetop Gooseneck Kettle</MenuItem>
-                                <MenuItem value={"Electric Gooseneck Kettle"}>Electric Gooseneck Kettle</MenuItem>
-                            </Select>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    name="kettleType"
+                                    id="demo-simple-select"
+                                    value={this.props.kettleType}
+                                    onChange={this.props.handleChange}
+                                >
+                                    <MenuItem value={"None"}>None</MenuItem>
+                                    <MenuItem value={"Stovetop Kettle"}>Stovetop Kettle</MenuItem>
+                                    <MenuItem value={"Electric Kettle"}>Electric Kettle</MenuItem>
+                                    <MenuItem value={"Variable Temperature Kettle"}>Variable Temperature Kettle</MenuItem>
+                                    <MenuItem value={"Stovetop Gooseneck Kettle"}>Stovetop Gooseneck Kettle</MenuItem>
+                                    <MenuItem value={"Electric Gooseneck Kettle"}>Electric Gooseneck Kettle</MenuItem>
+                                </Select>
                         </FormControl>
 
                         <FormControl className={classes.formControl}>
