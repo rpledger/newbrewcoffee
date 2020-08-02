@@ -122,6 +122,19 @@ const brewTypes = [
     "espressoMachine"
 ]
 
+const scaleRecText = `
+Ensuring that you always use a brew ratio of around 1:16 coffee to water will improve your coffee's taste,
+and consistency from cup to cup. Using a scale when brewing coffee will provide this consistency and accuracy.
+Since coffee beans are not very heavy, many recommend using a scale with that weighs to a tenth of a gram.
+However, if you are just starting out, a standard kitchen scale will work just fine!
+`;
+
+function scaleRec(scale) {
+    if(scale === "None") return( <p>Since you don't have a scale, we recommend purchasing a <b>tenth of a gram scale</b>.</p>)
+    else if(scale === "Kitchen Scale") return(<p>Since you already have a kitchen scale, you can upgrade to a <b>tenth of a gram scale</b>.</p>)
+    else return (<p>You already have a tenth of a gram scale! It is not essential, but if you want to upgrade, check out these <b>upgrade scales</b>.</p>)
+}
+
 function noGrinderPreGround(brewerType, grinder, coffeeType) {
     return (grinder === "None" && (
         ((brewerType !== "espressoMachine") && (coffeeType === "Store-Bought Pre-Ground")) ||
@@ -155,17 +168,32 @@ class Reccomendations extends Component {
                     Current Gear
                 </Typography>
                 <div>
-                    <p>{this.props.scaleType}</p>
-                    <p>{this.props.kettleType}</p>
-                    <p>{this.props.grinderType}</p>
-                    <p>{this.props.brewerTypes.join(', ')}</p>
-                    <p>{this.props.coffeeBeanType}</p>
+                    <p>Scale: {this.props.scaleType}</p>
+                    <p>Kettle: {this.props.kettleType}</p>
+                    <p>Grinder: {this.props.grinderType}</p>
+                    <p>Brewers: {this.props.brewerTypes.join(', ')}</p>
+                    <p>Coffee Bean Type: {this.props.coffeeBeanType}</p>
                 </div>
                 <Typography className={classes.title} variant="h4" noWrap>
                     What can I brew now?
                 </Typography>
                 <div>
                     {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes, this.props.coffeeBeanType))}
+                </div>
+                <Typography className={classes.title} variant="h4" noWrap>
+                    Recommendations
+                </Typography>
+                <Typography className={classes.title} variant="h5" noWrap>
+                    Scale
+                </Typography>
+                <div>
+                    <p>
+                        Ensuring that you always use a brew ratio of around 1:16 coffee to water will greatly improve your coffee's taste
+                        and consistency from cup to cup. Using a scale when brewing coffee to weigh your beans and water will help provide this consistency and accuracy.
+                        Since coffee beans are not very heavy, it is generally recommend to use a scale that weighs to a tenth of a gram.
+                        However, if you are just starting out, a standard kitchen scale will work just fine!
+                    </p>
+                    {scaleRec(this.props.scaleType)}
                 </div>
             </div>
         );
