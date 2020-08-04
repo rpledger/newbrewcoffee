@@ -122,6 +122,18 @@ const brewTypes = [
     "espressoMachine"
 ]
 
+const brewerCategories = {
+    "Batch": "Batch",
+    "French Press": "Immersion",
+    "AeroPress": "Immersion",
+    "Chemex": "Pourover",
+    "Kalita Wave": "Pourover",
+    "Hario v60": "Pourover",
+    "Moka Pot": "Stovetop Brewer",
+    "Cold Brew Device": "Cold Brew",
+    "Espresso Machine": "Espresso"
+}
+
 const scaleRecText = `
 Ensuring that you always use a brew ratio of around 1:16 coffee to water will improve your coffee's taste,
 and consistency from cup to cup. Using a scale when brewing coffee will provide this consistency and accuracy.
@@ -129,10 +141,46 @@ Since coffee beans are not very heavy, many recommend using a scale with that we
 However, if you are just starting out, a standard kitchen scale will work just fine!
 `;
 
+const kettleRecText = `
+The magic recipe for coffee consists of just ground coffee and hot water (unless your making cold brew!). The right hot water kettle makes it easy
+to heat up water to the ideal temperature for brewing coffee (around 205-210 degrees F). Many traditional stovetop or electric kettles don't allow
+you to set a specific temperature to heat the water to. If you have of these kettles, it is recommended to heat the water to a boil and then wait
+30 seconds before brewing. However, using a variable temperature electric kettle will allow you to brew at a more precise temperature.
+Some methods of brewing, including pourover (e.g. Chemex, Hario v60, Kalita Wave)
+will also benefit from using a kettle with a gooseneck spout that allows you to control the speed and flow rate of your pour.
+`;
+
 function scaleRec(scale) {
     if(scale === "None") return( <p>Since you don't have a scale, we recommend purchasing a <b>tenth of a gram scale</b>.</p>)
     else if(scale === "Kitchen Scale") return(<p>Since you already have a kitchen scale, you can upgrade to a <b>tenth of a gram scale</b>.</p>)
-    else return (<p>You already have a tenth of a gram scale! It is not essential, but if you want to upgrade, check out these <b>upgrade scales</b>.</p>)
+    // else return (<p>You already have a tenth of a gram scale! It is not essential, but if you want to upgrade, check out these <b>upgrade scales</b>.</p>)
+}
+
+function kettleRec(kettle, currentBrewers, futureBrewers) {
+    let currentBrewerCategories = {}
+    //let brewers = [].concat(currentBrewers, futureBrewers);
+    currentBrewers.forEach(brewer => {
+            let category = brewerCategories[brewer]
+            console.log(category)
+            if (currentBrewerCategories[category] === undefined){
+                currentBrewerCategories[category] = [brewer]
+            } else {
+                currentBrewerCategories[category].push(brewer)
+            }
+        }
+    )
+    console.log(currentBrewerCategories)
+
+    if ((kettle === "None" ||
+        kettle === "Stovetop Kettle" ||
+        kettle === "Electric Kettle" ||
+        kettle === "Variable Temperature Kettle")
+        && Object.keys(currentBrewerCategories).includes("Pourover")) return( <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>)
+    else if ((kettle === "None" ||
+        kettle === "Stovetop Kettle" ||
+        kettle === "Electric Kettle")
+        && Object.keys(currentBrewerCategories).includes("Immersion")) return( <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>)
+
 }
 
 function noGrinderPreGround(brewerType, grinder, coffeeType) {
@@ -183,17 +231,22 @@ class Reccomendations extends Component {
                 <Typography className={classes.title} variant="h4" noWrap>
                     Recommendations
                 </Typography>
-                <Typography className={classes.title} variant="h5" noWrap>
+                <Typography className={classes.title} variant="h4" noWrap>
+                    Recommendations for your current gear
+                </Typography>
+                <Typography className={classes.title} variant="h6" noWrap>
                     Scale
                 </Typography>
                 <div>
-                    <p>
-                        Ensuring that you always use a brew ratio of around 1:16 coffee to water will greatly improve your coffee's taste
-                        and consistency from cup to cup. Using a scale when brewing coffee to weigh your beans and water will help provide this consistency and accuracy.
-                        Since coffee beans are not very heavy, it is generally recommend to use a scale that weighs to a tenth of a gram.
-                        However, if you are just starting out, a standard kitchen scale will work just fine!
-                    </p>
+                    <p>{scaleRecText}</p>
                     {scaleRec(this.props.scaleType)}
+                </div>
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Kettle
+                </Typography>
+                <div>
+                    <p>{kettleRecText}</p>
+                    {kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}
                 </div>
             </div>
         );

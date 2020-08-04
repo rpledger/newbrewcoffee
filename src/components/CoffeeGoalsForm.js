@@ -109,24 +109,40 @@ class CoffeeGoalsForm extends Component {
                             What are your coffee dreams?
                         </Typography>
                         <FormControl className={classes.formControl}>
-                            <InputLabel id="demo-mutiple-checkbox-label">Goals?</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Primary Goal</InputLabel>
                             <Select
-                                labelId="demo-mutiple-checkbox-label"
-                                id="demo-mutiple-checkbox"
-                                name="goals"
-                                multiple
-                                value={this.props.goals}
+                                labelId="demo-simple-select-label"
+                                name="primaryGoal"
+                                id="demo-simple-select"
+                                value={this.props.primaryGoal}
                                 onChange={this.props.handleChange}
-                                input={<Input />}
-                                renderValue={(selected) => selected.join(', ')}
-                                MenuProps={MenuProps}
                             >
-                                {goalNames.map((name) => (
-                                    <MenuItem key={name} value={name}>
-                                        <Checkbox checked={this.props.goals.indexOf(name) > -1} />
-                                        <ListItemText primary={name} />
-                                    </MenuItem>
-                                ))}
+                                <MenuItem value={"None"}>None</MenuItem>
+                                <MenuItem value={"Buy Entry Level Coffee Starter Gear"}>Buy Entry Level Coffee Starter Gear</MenuItem>
+                                <MenuItem value={"Brew More Coffee at Once"}>Brew More Coffee at Once</MenuItem>
+                                <MenuItem value={"Brew Higher Quality Coffee"}>Brew Higher Quality Coffee</MenuItem>
+                                <MenuItem value={"Upgrade My Current Gear"}>Upgrade My Current Gear</MenuItem>
+                                <MenuItem value={"Find 'Buy it for Life' Gear"}>Find 'Buy it for Life' Gear</MenuItem>
+                                <MenuItem value={"Explore New Coffee Techniques"}>Explore New Coffee Techniques</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <FormControl className={classes.formControl}>
+                            <InputLabel id="demo-simple-select-label">Optional Secondary Goal</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                name="secondaryGoal"
+                                id="demo-simple-select"
+                                value={this.props.secondaryGoal}
+                                onChange={this.props.handleChange}
+                            >
+                                <MenuItem value={"None"}>None</MenuItem>
+                                <MenuItem value={"Buy Entry Level Coffee Starter Gear"}>Buy Entry Level Coffee Starter Gear</MenuItem>
+                                <MenuItem value={"Brew More Coffee at Once"}>Brew More Coffee at Once</MenuItem>
+                                <MenuItem value={"Brew Higher Quality Coffee"}>Brew Higher Quality Coffee</MenuItem>
+                                <MenuItem value={"Upgrade My Current Gear"}>Upgrade My Current Gear</MenuItem>
+                                <MenuItem value={"Find 'Buy it for Life' Gear"}>Find 'Buy it for Life' Gear</MenuItem>
+                                <MenuItem value={"Explore New Coffee Techniques"}>Explore New Coffee Techniques</MenuItem>
                             </Select>
                         </FormControl>
 

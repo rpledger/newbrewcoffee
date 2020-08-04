@@ -51,9 +51,9 @@ class CoffeeForm extends Component {
         this.state = {
             activeStep: 0,
             skipped: new Set(),
-            scaleType: "",
-            kettleType: "",
-            grinderType: "",
+            scaleType: undefined,
+            kettleType: undefined,
+            grinderType: undefined,
             brewerTypes: [],
             coffeeBeanType: "",
             timeOfDay: "",
@@ -158,8 +158,8 @@ class CoffeeForm extends Component {
             case 2:
                 return(
                     <CoffeeGoalsForm
-                        goals={this.state.goals}
-                        brewerNames={this.state.brewerNames}
+                        primaryGoal={this.state.primaryGoal}
+                        secondaryGoal={this.state.secondaryGoal}
                         futureBrewerNames={this.state.futureBrewerNames}
                         handleChange={this.handleChange}
                     />
@@ -204,6 +204,8 @@ class CoffeeForm extends Component {
                                 grinderType={this.state.grinderType}
                                 brewerTypes={this.state.brewerTypes}
                                 coffeeBeanType={this.state.coffeeBeanType}
+                                primaryGoal={this.state.primaryGoal}
+                                secondaryGoal={this.state.secondaryGoal}
                             />
                             {/*<Typography className={classes.instructions}>*/}
                             {/*    All steps completed - you&apos;re finished*/}
