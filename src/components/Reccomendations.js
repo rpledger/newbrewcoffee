@@ -156,12 +156,9 @@ function scaleRec(scale) {
     // else return (<p>You already have a tenth of a gram scale! It is not essential, but if you want to upgrade, check out these <b>upgrade scales</b>.</p>)
 }
 
-function kettleRec(kettle, currentBrewers, futureBrewers) {
+function getBrewerCategories(currentBrewers, futureBrewers) {
     let currentBrewerCategories = {}
-    let brewers = Array.from(new Set(currentBrewers.concat(futureBrewers)));
-    console.log("Current " + currentBrewers)
-    console.log("Future " + futureBrewers)
-    console.log(brewers)
+    let brewers = Array.from(new Set(currentBrewers.concat(futureBrewers)))
     brewers.forEach(brewer => {
             let category = brewerCategories[brewer]
             console.log(category)
@@ -172,18 +169,45 @@ function kettleRec(kettle, currentBrewers, futureBrewers) {
             }
         }
     )
-    console.log(currentBrewerCategories)
+    return currentBrewerCategories
+}
+
+function kettleRec(kettle, currentBrewers, futureBrewers) {
+    let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
 
     if ((kettle === "None" ||
         kettle === "Stovetop Kettle" ||
         kettle === "Electric Kettle" ||
         kettle === "Variable Temperature Kettle")
-        && Object.keys(currentBrewerCategories).includes("Pourover")) return( <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>)
+        && Object.keys(currentBrewerCategories).includes("Pourover"))return( <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>)
     else if ((kettle === "None" ||
         kettle === "Stovetop Kettle" ||
         kettle === "Electric Kettle")
         && Object.keys(currentBrewerCategories).includes("Immersion")) return( <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>)
 
+}
+
+function grinderRec(grinder, currentBrewers, futureBrewers) {
+    let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
+
+    if ((grinder === "None" ||
+        grinder === "Blade Grinder" ||
+        grinder === "Hand Burr Grinder" ||
+        grinder === "Electric Burr Grinder <120")
+        && Object.keys(currentBrewerCategories).includes("Espresso")) {
+        return(
+            <p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+        )
+    }
+
+    else if (grinder === "None" ||
+        grinder === "Blade Grinder" ||
+        grinder === "Hand Burr Grinder" ||
+        grinder === "Electric Burr Grinder <120") {
+        return(
+            <p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+        )
+    }
 }
 
 function noGrinderPreGround(brewerType, grinder, coffeeType) {
@@ -250,6 +274,13 @@ class Reccomendations extends Component {
                 <div>
                     <p>{kettleRecText}</p>
                     {kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                </div>
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Grinder
+                </Typography>
+                <div>
+                    {/*<p>{grinderRecText}</p>*/}
+                    {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
                 </div>
             </div>
         );
