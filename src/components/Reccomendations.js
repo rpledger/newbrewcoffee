@@ -158,8 +158,11 @@ function scaleRec(scale) {
 
 function kettleRec(kettle, currentBrewers, futureBrewers) {
     let currentBrewerCategories = {}
-    //let brewers = [].concat(currentBrewers, futureBrewers);
-    currentBrewers.forEach(brewer => {
+    let brewers = Array.from(new Set(currentBrewers.concat(futureBrewers)));
+    console.log("Current " + currentBrewers)
+    console.log("Future " + futureBrewers)
+    console.log(brewers)
+    brewers.forEach(brewer => {
             let category = brewerCategories[brewer]
             console.log(category)
             if (currentBrewerCategories[category] === undefined){

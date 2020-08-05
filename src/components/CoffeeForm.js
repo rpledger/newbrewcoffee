@@ -206,6 +206,7 @@ class CoffeeForm extends Component {
                                 coffeeBeanType={this.state.coffeeBeanType}
                                 primaryGoal={this.state.primaryGoal}
                                 secondaryGoal={this.state.secondaryGoal}
+                                futureBrewerNames={this.state.futureBrewerNames}
                             />
                             {/*<Typography className={classes.instructions}>*/}
                             {/*    All steps completed - you&apos;re finished*/}
