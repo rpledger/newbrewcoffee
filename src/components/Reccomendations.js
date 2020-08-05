@@ -159,6 +159,22 @@ grinder. Many hand burr grinders less expensive than their electric counterparts
 tiresome.
 `
 
+const beansRecText = `
+You can't make good coffee without good coffee beans! In an ideal scenario, you should always buy whole coffee and grind
+right before brewing. The best way to get great beans is to visit your local coffee shop.
+Ask your local barista what they recommend for what brewing device you are using. After coffee is roasted, it begins
+
+Another thing to consider when you buy coffee beans, is when the coffee was roasted. You'll get the best flavor out of
+your coffee if you buy it within two weeks of when it was roasted. Most reputable roaster will put the roasting date on
+the bag.
+
+If you don't have a grinder at home, you'll need to purchase pre-ground beans
+from the store or a coffee shop. However, the longer coffee sits after it's been ground,
+the more yummy flavors will be lost. Pre-ground coffee purchased at a grocery store, will likely have been sitting on
+the shelf for a while before it is purchased. If you don't have a grinder, we recommend buying coffee at a local coffee shop
+and have them grind it appropriately for what ever brewer you'll be using. 
+`
+
 function scaleRec(scale) {
     if(scale === "None") return( <p>Since you don't have a scale, we recommend purchasing a <b>tenth of a gram scale</b>.</p>)
     else if(scale === "Kitchen Scale") return(<p>Since you already have a kitchen scale, you can upgrade to a <b>tenth of a gram scale</b>.</p>)
@@ -289,6 +305,13 @@ class Reccomendations extends Component {
                 </Typography>
                 <div>
                     <p>{grinderRecText}</p>
+                    {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                </div>
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Coffee Beans
+                </Typography>
+                <div>
+                    <p>{beansRecText}</p>
                     {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
                 </div>
             </div>
