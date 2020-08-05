@@ -150,6 +150,15 @@ Some methods of brewing, including pourover (e.g. Chemex, Hario v60, Kalita Wave
 will also benefit from using a kettle with a gooseneck spout that allows you to control the speed and flow rate of your pour.
 `;
 
+const grinderRecText = `
+Grinders are the most import part of brewing coffee. If you are going to spend more money on one thing it should be
+the grinder. There are two main categories of grinders: blade grinders and burr grinders. A burr grinder is essential 
+to brewing great coffee because it grinds the beans to a much more uniform size than a blade grinder. A quality burr 
+grinder will start at around $150, however if that is more than your budget allows, you can also purchase a hand burr
+grinder. Many hand burr grinders less expensive than their electric counterparts, however hand grinding coffee can become
+tiresome.
+`
+
 function scaleRec(scale) {
     if(scale === "None") return( <p>Since you don't have a scale, we recommend purchasing a <b>tenth of a gram scale</b>.</p>)
     else if(scale === "Kitchen Scale") return(<p>Since you already have a kitchen scale, you can upgrade to a <b>tenth of a gram scale</b>.</p>)
@@ -279,7 +288,7 @@ class Reccomendations extends Component {
                     Grinder
                 </Typography>
                 <div>
-                    {/*<p>{grinderRecText}</p>*/}
+                    <p>{grinderRecText}</p>
                     {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
                 </div>
             </div>
