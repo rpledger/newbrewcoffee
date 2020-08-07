@@ -40,6 +40,14 @@ const useStyles = (theme, name) => ({
     selectEmpty: {
         marginTop: theme.spacing(2),
     },
+    flexGrid: {
+        display: "flex",
+        justifyContent: "space-between",
+        width: "80%"
+    },
+    col: {
+        flex: 1,
+    }
 });
 
 const ITEM_HEIGHT = 48;
@@ -286,33 +294,45 @@ class Reccomendations extends Component {
                 <Typography className={classes.title} variant="h4" noWrap>
                     Recommendations for your current gear
                 </Typography>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Scale
-                </Typography>
-                <div>
-                    <p>{scaleRecText}</p>
-                    {scaleRec(this.props.scaleType)}
+                <div className={classes.flexGrid}>
+                    <div className={classes.col}>
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            Scale
+                        </Typography>
+                        <div>
+                            <p>{scaleRecText}</p>
+                            {scaleRec(this.props.scaleType)}
+                        </div>
+                    </div>
+                    <div className={classes.col}>
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            Kettle
+                        </Typography>
+                        <div>
+                            <p>{kettleRecText}</p>
+                            {kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                        </div>
+                    </div>
                 </div>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Kettle
-                </Typography>
-                <div>
-                    <p>{kettleRecText}</p>
-                    {kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}
-                </div>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Grinder
-                </Typography>
-                <div>
-                    <p>{grinderRecText}</p>
-                    {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
-                </div>
-                <Typography className={classes.title} variant="h6" noWrap>
-                    Coffee Beans
-                </Typography>
-                <div>
-                    <p>{beansRecText}</p>
-                    {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                <div className={classes.flexGrid}>
+                    <div className={classes.col}>
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            Grinder
+                        </Typography>
+                        <div>
+                            <p>{grinderRecText}</p>
+                            {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                        </div>
+                    </div>
+                    <div className={classes.col}>
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            Coffee Beans
+                        </Typography>
+                        <div>
+                            <p>{beansRecText}</p>
+                            {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
