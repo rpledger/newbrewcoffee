@@ -241,6 +241,7 @@ function kettleRec(kettle, currentBrewers, futureBrewers) {
 
 function grinderRec(grinder, currentBrewers, futureBrewers) {
     let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
+    console.log("Grinder: " + grinder)
 
     if ((grinder === "None" ||
         grinder === "Blade Grinder" ||
@@ -248,16 +249,31 @@ function grinderRec(grinder, currentBrewers, futureBrewers) {
         grinder === "Electric Burr Grinder <120")
         && Object.keys(currentBrewerCategories).includes("Espresso")) {
         return(
-            <p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+            {"rec": "Quality Burr Grinder", "description": "Since you want to make espresso, you'll need a high quality burr grinder.", "priority": 2}
+        //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
         )
     }
-
-    else if (grinder === "None" ||
-        grinder === "Blade Grinder" ||
-        grinder === "Hand Burr Grinder" ||
-        grinder === "Electric Burr Grinder <120") {
+    else if (
+        grinder === "None" ||
+        grinder === "Blade Grinder"
+    ) {
         return(
-            <p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+            {"rec": "Quality Burr Grinder", "description": "Since you don't have a burr grinder, you can upgrade to a high quality burr grinder.", "priority": 2}
+            //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+        )
+    }
+    else if (
+        grinder === "Hand Burr Grinder" ||
+        grinder === "Electric Burr Grinder <120"
+    ) {
+        return(
+            {"rec": "Quality Burr Grinder", "description": "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder.", "priority": 1}
+            //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+        )
+    }
+    else {
+        return (
+            {"rec": "Quality Burr Grinder", "description": "Since you already have a high quality burr grinder, you're all set.", "priority": 0}
         )
     }
 }
@@ -286,7 +302,7 @@ function getRecsByPriority(scale, kettle, grinder, currentBrewers, futureBrewers
     let allRecs = {
         "scale": scaleRec(scale),
         // "kettle": kettleRec(kettle, currentBrewers, futureBrewers),
-        // "grinder": grinderRec(grinder, currentBrewers, futureBrewers)
+        "grinder": grinderRec(grinder, currentBrewers, futureBrewers)
     }
 
     Object.keys(allRecs).forEach( recName => {
@@ -304,7 +320,7 @@ function getRecsByPriority(scale, kettle, grinder, currentBrewers, futureBrewers
 }
 
 function renderRecs(recPriorities) {
-    return [0, 1, 2, 3].map(pri => {
+    return [2, 1, 0].map(pri => {
         let priorityName = priorities[pri]
         let recPriority = recPriorities[pri]
         if (typeof recPriority !== "undefined") {
@@ -329,7 +345,8 @@ class Reccomendations extends Component {
         let recPriorities = getRecsByPriority(
             this.props.scaleType,
             this.props.kettleType,
-            this.props.currentBrewMethods,
+            this.props.grinderType,
+            this.props.currentBrewerNames,
             this.props.futureBrewerNames,
             this.props.coffeeBeanType
         )

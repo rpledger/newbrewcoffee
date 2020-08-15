@@ -88,7 +88,7 @@ class GearForm extends Component {
             timeOfDay: "",
             numOfDrinkers: "",
             cupsPerPerson: "",
-            currentBrewMethods: "",
+            currentBrewerNames: "",
             goals: [],
             brewerNames: [],
             futureBrewerNames: []
