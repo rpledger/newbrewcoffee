@@ -10,11 +10,12 @@ import CurrentRoutineForm from "./CurrentRoutineForm";
 import CoffeeGoalsForm from "./CoffeeGoalsForm";
 import { createMuiTheme } from '@material-ui/core/styles';
 import Reccomendations from "./Reccomendations";
+import CurrentGearOverview from "./CurrentGearOverview";
 
 const theme = createMuiTheme({
     palette: {
         primary: {
-            light: '#f9683a',
+            light: '#f7ede2',
             main: '#bf360c',
             dark: '#870000',
             contrastText: '#ffffff',
@@ -30,7 +31,7 @@ const theme = createMuiTheme({
 
 const useStyles = (theme) => ({
     root: {
-        width: '100%',
+        width: '100%'
     },
     button: {
         marginRight: theme.spacing(1),
@@ -42,7 +43,7 @@ const useStyles = (theme) => ({
 });
 
 function getSteps() {
-    return ['Current Gear', 'Current Routine', 'Coffee Goals'];
+    return ['Current Gear', 'Current Routine', 'Coffee Goals', 'Overview'];
 }
 
 class CoffeeForm extends Component {
@@ -162,6 +163,16 @@ class CoffeeForm extends Component {
                         secondaryGoal={this.state.secondaryGoal}
                         futureBrewerNames={this.state.futureBrewerNames}
                         handleChange={this.handleChange}
+                    />
+                );
+            case 3:
+                return (
+                    <CurrentGearOverview
+                        scaleType={this.state.scaleType}
+                        kettleType={this.state.kettleType}
+                        grinderType={this.state.grinderType}
+                        brewerTypes={this.state.brewerTypes}
+                        coffeeBeanType={this.state.coffeeBeanType}
                     />
                 );
             default:

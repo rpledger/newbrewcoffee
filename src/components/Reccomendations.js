@@ -1,16 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {withStyles} from "@material-ui/core/styles";
-import Paper from '@material-ui/core/Paper';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import Typography from "@material-ui/core/Typography";
-import Input from '@material-ui/core/Input';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Tooltip from '@material-ui/core/Tooltip';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import RecList from "./RecList";
 
 const useStyles = (theme, name) => ({
     root: {
@@ -41,12 +32,14 @@ const useStyles = (theme, name) => ({
         marginTop: theme.spacing(2),
     },
     flexGrid: {
-        display: "flex",
-        justifyContent: "space-between",
-        width: "80%"
+        // display: "flex",
+        // justifyContent: "space-between",
+        width: "55%",
+
     },
     col: {
-        flex: 1,
+        // flex: 1,
+        // padding: "20px"
     }
 });
 
@@ -142,14 +135,21 @@ const brewerCategories = {
     "Espresso Machine": "Espresso"
 }
 
-const scaleRecText = `
+const scaleRecTextLong = `
 Ensuring that you always use a brew ratio of around 1:16 coffee to water will improve your coffee's taste,
 and consistency from cup to cup. Using a scale when brewing coffee will provide this consistency and accuracy.
 Since coffee beans are not very heavy, many recommend using a scale with that weighs to a tenth of a gram.
 However, if you are just starting out, a standard kitchen scale will work just fine!
 `;
 
-const kettleRecText = `
+const scaleRecText = `
+Using a scale when brewing coffee will provide consistency and accuracy.
+A scale will allow you to brew with an exact ratio of coffee to water.
+Since coffee beans are light, many recommend using a scale that weighs to a tenth of a gram.
+However, if you are just starting out, a standard kitchen scale will work just fine!
+`;
+
+const kettleRecTextLong = `
 The magic recipe for coffee consists of just ground coffee and hot water (unless your making cold brew!). The right hot water kettle makes it easy
 to heat up water to the ideal temperature for brewing coffee (around 205-210 degrees F). Many traditional stovetop or electric kettles don't allow
 you to set a specific temperature to heat the water to. If you have of these kettles, it is recommended to heat the water to a boil and then wait
@@ -158,7 +158,13 @@ Some methods of brewing, including pourover (e.g. Chemex, Hario v60, Kalita Wave
 will also benefit from using a kettle with a gooseneck spout that allows you to control the speed and flow rate of your pour.
 `;
 
-const grinderRecText = `
+const kettleRecText = `
+The ideal temperature for brewing coffee is around 205-210 degrees F.
+A variable temperature electric kettle allows you to set the temperature to heat the water to.
+Pourovers will also benefit from using a kettle with a gooseneck spout which allows you to control the speed and flow rate of your pour.
+`;
+
+const grinderRecTextLong = `
 Grinders are the most import part of brewing coffee. If you are going to spend more money on one thing it should be
 the grinder. There are two main categories of grinders: blade grinders and burr grinders. A burr grinder is essential 
 to brewing great coffee because it grinds the beans to a much more uniform size than a blade grinder. A quality burr 
@@ -167,7 +173,13 @@ grinder. Many hand burr grinders less expensive than their electric counterparts
 tiresome.
 `
 
-const beansRecText = `
+const grinderRecText = `
+A burr grinder is essential to brewing great coffee because it grinds the beans to a more uniform size than a blade grinder.
+A quality burr grinder will start at around $150. However, a cheaper alternative is to purchase a hand burr
+grinder. While they are less expensive, hand grinding coffee can become tiresome.
+`
+
+const beansRecTextLong = `
 You can't make good coffee without good coffee beans! In an ideal scenario, you should always buy whole coffee and grind
 right before brewing. The best way to get great beans is to visit your local coffee shop.
 Ask your local barista what they recommend for what brewing device you are using. After coffee is roasted, it begins
@@ -183,10 +195,17 @@ the shelf for a while before it is purchased. If you don't have a grinder, we re
 and have them grind it appropriately for what ever brewer you'll be using. 
 `
 
+const beansRecText = `
+Coffee will taste it's best if you buy it within two weeks of when it was roasted and if you grind it right before brewing.
+The best way to get great beans is to visit your local coffee shop and ask the barista what they recommend for your brewing device.
+`
+
+const priorities = ["No Recommendation", "Optional Upgrade", "Essential"]
+
 function scaleRec(scale) {
-    if(scale === "None") return( <p>Since you don't have a scale, we recommend purchasing a <b>tenth of a gram scale</b>.</p>)
-    else if(scale === "Kitchen Scale") return(<p>Since you already have a kitchen scale, you can upgrade to a <b>tenth of a gram scale</b>.</p>)
-    // else return (<p>You already have a tenth of a gram scale! It is not essential, but if you want to upgrade, check out these <b>upgrade scales</b>.</p>)
+    if(scale === "None") return( {"rec": "A tenth of a gram scale", "description": "Since you don't have a scale, we suggest purchasing a tenth of a gram scale.", "priority": 2})
+    else if(scale === "Kitchen Scale") return({"rec": "A tenth of a gram scale", "description": "Since you have a kitchen scale, you can optionally upgrade to a tenth of a gram scale", "priority": 1})
+    else if(scale === "Tenth of a Gram Scale") return({"rec": "Upgraded scale", "description": "Since you already have a tenth of a gram scale, you're all set! If you're looking to upgrade your scale, we recommend these.", "priority": 1})
 }
 
 function getBrewerCategories(currentBrewers, futureBrewers) {
@@ -262,6 +281,43 @@ function canBrew(type, scale, kettle, grinder, brewerType, coffeeType) {
     ) return( <p>{brewMap[type].brewerType}</p> )
 }
 
+function getRecsByPriority(scale, kettle, grinder, currentBrewers, futureBrewers, coffeeType) {
+    let recPriorities = {}
+    let allRecs = {
+        "scale": scaleRec(scale),
+        // "kettle": kettleRec(kettle, currentBrewers, futureBrewers),
+        // "grinder": grinderRec(grinder, currentBrewers, futureBrewers)
+    }
+
+    Object.keys(allRecs).forEach( recName => {
+            let rec = allRecs[recName]
+            let priority = rec["priority"]
+
+            if (recPriorities[priority] === undefined) {
+                recPriorities[priority] = [rec]
+            } else {
+                recPriorities[priority].push(rec)
+            }
+        }
+    )
+    return recPriorities
+}
+
+function renderRecs(recPriorities) {
+    return [0, 1, 2, 3].map(pri => {
+        let priorityName = priorities[pri]
+        let recPriority = recPriorities[pri]
+        if (typeof recPriority !== "undefined") {
+            return (
+                <RecList
+                    recName={priorityName}
+                    recList={recPriority}
+                />
+            )
+        }
+    })
+}
+
 class Reccomendations extends Component {
     constructor(props){
         super(props);
@@ -270,70 +326,79 @@ class Reccomendations extends Component {
 
     render() {
         const { classes } = this.props;
+        let recPriorities = getRecsByPriority(
+            this.props.scaleType,
+            this.props.kettleType,
+            this.props.currentBrewMethods,
+            this.props.futureBrewerNames,
+            this.props.coffeeBeanType
+        )
         return (
             <div className={classes.root}>
-                <Typography className={classes.title} variant="h4" noWrap>
-                    Current Gear
-                </Typography>
-                <div>
-                    <p>Scale: {this.props.scaleType}</p>
-                    <p>Kettle: {this.props.kettleType}</p>
-                    <p>Grinder: {this.props.grinderType}</p>
-                    <p>Brewers: {this.props.brewerTypes.join(', ')}</p>
-                    <p>Coffee Bean Type: {this.props.coffeeBeanType}</p>
-                </div>
-                <Typography className={classes.title} variant="h4" noWrap>
-                    What can I brew now?
-                </Typography>
-                <div>
-                    {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes, this.props.coffeeBeanType))}
-                </div>
-                <Typography className={classes.title} variant="h4" noWrap>
-                    Recommendations
-                </Typography>
+                {/*<Typography className={classes.title} variant="h4" noWrap>*/}
+                {/*    Current Gear*/}
+                {/*</Typography>*/}
+                {/*<div>*/}
+                {/*    <p>Scale: {this.props.scaleType}</p>*/}
+                {/*    <p>Kettle: {this.props.kettleType}</p>*/}
+                {/*    <p>Grinder: {this.props.grinderType}</p>*/}
+                {/*    <p>Brewers: {this.props.brewerTypes.join(', ')}</p>*/}
+                {/*    <p>Coffee Bean Type: {this.props.coffeeBeanType}</p>*/}
+                {/*</div>*/}
+                {/*<Typography className={classes.title} variant="h4" noWrap>*/}
+                {/*    What can I brew now?*/}
+                {/*</Typography>*/}
+                {/*<div>*/}
+                {/*    {brewTypes.map(brew => canBrew(brew, this.props.scaleType, this.props.kettleType, this.props.grinderType, this.props.brewerTypes, this.props.coffeeBeanType))}*/}
+                {/*</div>*/}
+                {/*<Typography className={classes.title} variant="h4" noWrap>*/}
+                {/*    Recommendations*/}
+                {/*</Typography>*/}
                 <Typography className={classes.title} variant="h4" noWrap>
                     Recommendations for your current gear
                 </Typography>
-                <div className={classes.flexGrid}>
-                    <div className={classes.col}>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Scale
-                        </Typography>
-                        <div>
-                            <p>{scaleRecText}</p>
-                            {scaleRec(this.props.scaleType)}
-                        </div>
-                    </div>
-                    <div className={classes.col}>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Kettle
-                        </Typography>
-                        <div>
-                            <p>{kettleRecText}</p>
-                            {kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}
-                        </div>
-                    </div>
-                </div>
-                <div className={classes.flexGrid}>
-                    <div className={classes.col}>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Grinder
-                        </Typography>
-                        <div>
-                            <p>{grinderRecText}</p>
-                            {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
-                        </div>
-                    </div>
-                    <div className={classes.col}>
-                        <Typography className={classes.title} variant="h6" noWrap>
-                            Coffee Beans
-                        </Typography>
-                        <div>
-                            <p>{beansRecText}</p>
-                            {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}
-                        </div>
-                    </div>
-                </div>
+                {renderRecs(recPriorities)}
+                {/*<Typography className={classes.title} variant="h5" noWrap>*/}
+                {/*    Essentials*/}
+                {/*</Typography>*/}
+                {/*<div className={classes.flexGrid}>*/}
+                {/*    <div className={classes.col}>*/}
+                {/*        <RecItem*/}
+                {/*            recTitle={"Scale"}*/}
+                {/*            recImageSrc={"https://images-na.ssl-images-amazon.com/images/I/61L9kYByOdL._AC_SL1200_.jpg"}*/}
+                {/*            recImageAlt={"Amazon Scale"}*/}
+                {/*            rec={scaleRec(this.props.scaleType)}*/}
+                {/*            recDescription={scaleRecText}*/}
+                {/*        />*/}
+                {/*    </div>*/}
+                    {/*<div className={classes.col}>*/}
+                    {/*    <RecItem*/}
+                    {/*        recTitle={"Kettle"}*/}
+                    {/*        recImageSrc={"https://images-na.ssl-images-amazon.com/images/I/71MEjurY%2BwL._AC_SL1500_.jpg"}*/}
+                    {/*        recImageAlt={"Amazon Kettle"}*/}
+                    {/*        recText={kettleRec(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)}*/}
+                    {/*        recDescription={kettleRecText}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                    {/*<div className={classes.col}>*/}
+                    {/*    <RecItem*/}
+                    {/*        recTitle={"Grinder"}*/}
+                    {/*        recImageSrc={"https://images-na.ssl-images-amazon.com/images/I/711jsKbAS2L._AC_SL1500_.jpg"}*/}
+                    {/*        recImageAlt={"Amazon Grinder"}*/}
+                    {/*        recText={grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}*/}
+                    {/*        recDescription={grinderRecText}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                    {/*<div className={classes.col}>*/}
+                    {/*    <Typography className={classes.title} variant="h6" noWrap>*/}
+                    {/*        Coffee Beans*/}
+                    {/*    </Typography>*/}
+                    {/*    <div>*/}
+                    {/*        <p>{beansRecText}</p>*/}
+                    {/*        {grinderRec(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)}*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
             </div>
         );
     }
