@@ -210,6 +210,8 @@ function scaleRec(scale) {
 
 function getBrewerCategories(currentBrewers, futureBrewers) {
     let currentBrewerCategories = {}
+    if (typeof currentBrewers !== "object") currentBrewers = Array.from(currentBrewers)
+    if (typeof futureBrewers !== "object") futureBrewers = Array.from(futureBrewers)
     let brewers = Array.from(new Set(currentBrewers.concat(futureBrewers)))
     brewers.forEach(brewer => {
             let category = brewerCategories[brewer]
@@ -226,17 +228,34 @@ function getBrewerCategories(currentBrewers, futureBrewers) {
 
 function kettleRec(kettle, currentBrewers, futureBrewers) {
     let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
+    console.log("current: " + currentBrewers)
+    console.log("future: " + futureBrewers)
+    console.log(currentBrewerCategories)
 
     if ((kettle === "None" ||
         kettle === "Stovetop Kettle" ||
         kettle === "Electric Kettle" ||
         kettle === "Variable Temperature Kettle")
-        && Object.keys(currentBrewerCategories).includes("Pourover"))return( <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>)
-    else if ((kettle === "None" ||
+        && Object.keys(currentBrewerCategories).includes("Pourover")) {
+            let brewers = currentBrewerCategories["Pourover"].join(", ")
+            return(
+                {"rec": "Variable Temperature Eletric Gooseneck Kettle", "description": "Since you are interested in pourover brewers (" + brewers + ") we recommend purchasing a variable temperature electric gooseneck kettle", "priority": 2}
+                // <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>
+            )
+    } else if ((kettle === "None" ||
         kettle === "Stovetop Kettle" ||
         kettle === "Electric Kettle")
-        && Object.keys(currentBrewerCategories).includes("Immersion")) return( <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>)
-
+        && Object.keys(currentBrewerCategories).includes("Immersion")) {
+            let brewers = currentBrewerCategories["Immersion"].join(", ")
+            return(
+                {"rec": "Variable Temperature Eletric Kettle", "description": "Since you are interested in immersion brewers (" + brewers + ") we recommend purchasing a variable temperature electric kettle", "priority": 1}
+            // <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>
+            )
+    } else {
+        return (
+            {"rec": "Kettle", "description": "Since you already have a kettle, you're all set.", "priority": 0}
+            )
+    }
 }
 
 function grinderRec(grinder, currentBrewers, futureBrewers) {
@@ -273,7 +292,7 @@ function grinderRec(grinder, currentBrewers, futureBrewers) {
     }
     else {
         return (
-            {"rec": "Quality Burr Grinder", "description": "Since you already have a high quality burr grinder, you're all set.", "priority": 0}
+            {"rec": "Grinder", "description": "Since you already have a high quality burr grinder, you're all set.", "priority": 0}
         )
     }
 }
@@ -301,7 +320,7 @@ function getRecsByPriority(scale, kettle, grinder, currentBrewers, futureBrewers
     let recPriorities = {}
     let allRecs = {
         "scale": scaleRec(scale),
-        // "kettle": kettleRec(kettle, currentBrewers, futureBrewers),
+        "kettle": kettleRec(kettle, currentBrewers, futureBrewers),
         "grinder": grinderRec(grinder, currentBrewers, futureBrewers)
     }
 
@@ -346,7 +365,7 @@ class Reccomendations extends Component {
             this.props.scaleType,
             this.props.kettleType,
             this.props.grinderType,
-            this.props.currentBrewerNames,
+            this.props.brewerTypes,
             this.props.futureBrewerNames,
             this.props.coffeeBeanType
         )

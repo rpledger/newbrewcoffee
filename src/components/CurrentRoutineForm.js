@@ -88,7 +88,6 @@ class CurrentRoutineForm extends Component {
             timeOfDay: "",
             numOfDrinkers: "",
             cupsPerPerson: "",
-            currentBrewMethods: "",
             goals: [],
             brewerNames: [],
             futureBrewerNames: []

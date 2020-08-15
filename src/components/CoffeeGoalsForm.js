@@ -88,7 +88,6 @@ class CoffeeGoalsForm extends Component {
             timeOfDay: "",
             numOfDrinkers: "",
             cupsPerPerson: "",
-            currentBrewMethods: "",
             goals: [],
             brewerNames: [],
             futureBrewerNames: []

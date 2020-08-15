@@ -60,7 +60,6 @@ class CoffeeForm extends Component {
             timeOfDay: "",
             numOfDrinkers: "",
             cupsPerPerson: "",
-            currentBrewerNames: "",
             goals: [],
             brewerNames: [],
             futureBrewerNames: []
@@ -152,7 +151,7 @@ class CoffeeForm extends Component {
                         timeOfDay={this.state.timeOfDay}
                         numOfDrinkers={this.state.numOfDrinkers}
                         cupsPerPerson={this.state.cupsPerPerson}
-                        currentBrewerNames={this.state.currentBrewerNames}
+                        brewerTypes={this.state.brewerTypes}
                         handleChange={this.handleChange}
                     />
                 );
@@ -213,7 +212,7 @@ class CoffeeForm extends Component {
                                 scaleType={this.state.scaleType}
                                 kettleType={this.state.kettleType}
                                 grinderType={this.state.grinderType}
-                                currentBrewerNames={this.state.currentBrewerNames}
+                                brewerTypes={this.state.brewerTypes}
                                 coffeeBeanType={this.state.coffeeBeanType}
                                 primaryGoal={this.state.primaryGoal}
                                 secondaryGoal={this.state.secondaryGoal}
