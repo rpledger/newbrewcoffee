@@ -202,10 +202,42 @@ The best way to get great beans is to visit your local coffee shop and ask the b
 
 const priorities = ["No Recommendation", "Optional Upgrade", "Essential"]
 
+class Rec {
+    constructor(rec, current, description) {
+      this.rec = rec;
+      this.current = current;
+      this.description = description;
+    }
+  }
+
 function scaleRec(scale) {
-    if(scale === "None") return( {"rec": "A tenth of a gram scale", "description": "Since you don't have a scale, we suggest purchasing a tenth of a gram scale.", "priority": 2})
-    else if(scale === "Kitchen Scale") return({"rec": "A tenth of a gram scale", "description": "Since you have a kitchen scale, you can optionally upgrade to a tenth of a gram scale", "priority": 1})
-    else if(scale === "Tenth of a Gram Scale") return({"rec": "Upgraded scale", "description": "Since you already have a tenth of a gram scale, you're all set! If you're looking to upgrade your scale, we recommend these.", "priority": 1})
+    if(scale === "None") {
+        let rec = new Rec(
+            "Tenth of a Gram Scale",
+            scale,
+            "Since you don't have a scale, we suggest purchasing a tenth of a gram scale."
+        )
+        // essentialRecs.push(rec)
+    } //return( {"rec": "A tenth of a gram scale", "description": "Since you don't have a scale, we suggest purchasing a tenth of a gram scale.", "priority": 2})
+    else if(scale === "Kitchen Scale") {
+        let rec = new Rec(
+            "Tenth of a Gram Scale",
+            scale,
+            "Since you have a kitchen scale, you can optionally upgrade to a tenth of a gram scale."
+        )
+        // optionalRecs.push(rec)
+    } //return({"rec": "A tenth of a gram scale", "description": "Since you have a kitchen scale, you can optionally upgrade to a tenth of a gram scale", "priority": 1})
+    else if(scale === "Tenth of a Gram Scale") {
+        let rec = new Rec(
+            "Upgraded Scale",
+            scale,
+            "Since you already have a tenth of a gram scale, you're all set! If you're looking to upgrade your scale, we recommend these."
+        )
+        // optionalRecs.push(rec)
+    } //return({"rec": "Upgraded scale", "description": "Since you already have a tenth of a gram scale, you're all set! If you're looking to upgrade your scale, we recommend these.", "priority": 1})
+    else {
+
+    }
 }
 
 function getBrewerCategories(currentBrewers, futureBrewers) {
@@ -358,7 +390,99 @@ function renderRecs(recPriorities) {
 class Reccomendations extends Component {
     constructor(props){
         super(props);
-        this.state = {};
+        this.state = {
+            essentialRecs: [],
+            optionalRecs: []
+        };
+        this.scaleRecs = this.scaleRecs.bind(this);
+        this.grinderRecs = this.grinderRecs.bind(this);
+    }
+
+    scaleRecs(scale) {
+        if(scale === "None") {
+            let rec = new Rec(
+                "Tenth of a Gram Scale",
+                scale,
+                "Since you don't have a scale, we suggest purchasing a tenth of a gram scale."
+            )
+            this.state.essentialRecs.push(rec)
+        }
+        else if(scale === "Kitchen Scale") {
+            let rec = new Rec(
+                "Tenth of a Gram Scale",
+                scale,
+                "Since you have a kitchen scale, you can optionally upgrade to a tenth of a gram scale."
+            )
+            this.state.optionalRecs.push(rec)
+        }
+        else if(scale === "Tenth of a Gram Scale") {
+            let rec = new Rec(
+                "Upgraded Scale",
+                scale,
+                "Since you already have a tenth of a gram scale, you're all set! If you're looking to upgrade your scale, we recommend these."
+            )
+            this.state.optionalRecs.push(rec)
+        }
+    }
+
+    grinderRecs(grinder, currentBrewers, futureBrewers) {
+        let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
+        console.log("Grinder: " + grinder)
+    
+        if ((grinder === "None" ||
+            grinder === "Blade Grinder" ||
+            grinder === "Hand Burr Grinder" ||
+            grinder === "Electric Burr Grinder <$120")
+            && Object.keys(currentBrewerCategories).includes("Espresso")) {
+                let rec = new Rec(
+                    "Quality Burr Grinder",
+                    currentBrewers,
+                    "Since you want to make espresso, you'll need a high quality burr grinder."
+                )
+                this.state.essentialRecs.push(rec)
+            // return(
+            //     {"rec": "Quality Burr Grinder", "description": "Since you want to make espresso, you'll need a high quality burr grinder.", "priority": 2}
+            // //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+            // )
+        }
+        else if (
+            grinder === "None" ||
+            grinder === "Blade Grinder"
+        ) {
+            let rec = new Rec(
+                "Quality Burr Grinder",
+                currentBrewers,
+                "Since you don't have a burr grinder, you can upgrade to a high quality burr grinder."
+            )
+            this.state.essentialRecs.push(rec)
+
+            // return(
+            //     {"rec": "Quality Burr Grinder", "description": "Since you don't have a burr grinder, you can upgrade to a high quality burr grinder.", "priority": 2}
+            //     //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+            // )
+        }
+        else if (
+            grinder === "Hand Burr Grinder" ||
+            grinder === "Electric Burr Grinder <$120"
+        ) {
+            let rec = new Rec(
+                "Quality Burr Grinder",
+                currentBrewers,
+                "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder."
+            )
+            this.state.optionalRecs.push(rec)
+
+            // return(
+            //     {"rec": "Quality Burr Grinder", "description": "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder.", "priority": 1}
+            //     //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
+            // )
+        }
+        // else {
+            
+        //     return (
+        //         {"rec": "Grinder", "description": "Since you already have a high quality burr grinder, you're all set.", "priority": 0}
+        //     )
+        // }
     }
 
     render() {
@@ -371,6 +495,12 @@ class Reccomendations extends Component {
             this.props.futureBrewerNames,
             this.props.coffeeBeanType
         )
+
+        this.state.essentialRecs = []
+        this.state.optionalRecs = []
+        this.scaleRecs(this.props.scaleType)
+        this.grinderRecs(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)
+
         return (
             <div className={classes.root}>
                 {/*<Typography className={classes.title} variant="h4" noWrap>*/}
@@ -393,9 +523,21 @@ class Reccomendations extends Component {
                 {/*    Recommendations*/}
                 {/*</Typography>*/}
                 <Typography className={classes.title} variant="h4" noWrap>
-                    Recommendations for your current gear
+                    Recommendations
                 </Typography>
-                {renderRecs(recPriorities)}
+                { this.state.essentialRecs.length !== 0 &&
+                    <RecList
+                        recName="Essential"
+                        recList={this.state.essentialRecs}
+                    />
+                }
+                { this.state.optionalRecs.length !== 0 &&
+                    <RecList
+                        recName="Optional"
+                        recList={this.state.optionalRecs}
+                    />
+                }
+                {/* {renderRecs(recPriorities)} */}
                 {/*<Typography className={classes.title} variant="h5" noWrap>*/}
                 {/*    Essentials*/}
                 {/*</Typography>*/}

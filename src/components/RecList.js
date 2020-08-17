@@ -7,23 +7,34 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
+    cardList: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        // width: '60%',
+        textAlign: 'center',
+        margin: '2% 0',
+    }
 }));
 
 export default function RecList(props) {
     const classes = useStyles();
 
+    console.log("recList: " + props.recList)
     return (
+    
         <div>
             <Typography className={classes.title} variant="h5" noWrap>
                 {props.recName}
             </Typography>
-            <div>
-                {props.recList.map( rec => {
-                        console.log(rec)
+            <div className={classes.cardList}>
+                {props.recList.map( recItem => {
+                        console.log("recItem: " + recItem)
                         return (
                             <RecItem
-                                key={rec["rec"].hash}
-                                rec={rec}
+                                key={recItem.rec.hash}
+                                recItem={recItem}
                             />
                         )
                     }
