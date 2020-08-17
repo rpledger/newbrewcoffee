@@ -170,8 +170,8 @@ class GearForm extends Component {
                         <MenuItem value={"None"}>None</MenuItem>
                         <MenuItem value={"Blade Grinder"}>Blade Grinder</MenuItem>
                         <MenuItem value={"Hand Burr Grinder"}>Hand Burr Grinder</MenuItem>
-                        <MenuItem value={"Electric Burr Grinder <120"}>Electric Burr Grinder under $120</MenuItem>
-                        <MenuItem value={"Electric Burr Grinder >120"}>Electric Burr Grinder over $120</MenuItem>
+                        <MenuItem value={"Electric Burr Grinder <$120"}>Electric Burr Grinder under $120</MenuItem>
+                        <MenuItem value={"Electric Burr Grinder >$120"}>Electric Burr Grinder over $120</MenuItem>
                     </Select>
                 </FormControl>
 

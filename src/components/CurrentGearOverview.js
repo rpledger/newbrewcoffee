@@ -36,6 +36,7 @@ const useStyles = (theme, name) => ({
         // backgroundColor: 'red'
     },
     allForms: {
+        width: "50%"
         // backgroundColor: 'yellow'
     },
     selectEmpty: {
@@ -68,55 +69,55 @@ const brewMap = {
     "batch": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["None", "Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Batch Brewer"
     },
     "frenchPress": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "French Press"
     },
     "aeroPress": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "AeroPress"
     },
     "chemex": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Chemex"
     },
     "kalitaWave": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Kalita Wave"
     },
     "harioV60": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Hario v60"
     },
     "mokaPot": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Moka Pot"
     },
     "coldBrew": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Cold Brew Device"
     },
     "espressoMachine": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >120"],
+        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >$120"],
         brewerType: "Espresso Machine"
     }
 }

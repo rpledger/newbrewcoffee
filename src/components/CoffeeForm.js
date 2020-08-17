@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -40,6 +41,16 @@ const useStyles = (theme) => ({
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1),
     },
+    paper: {
+        marginTop: theme.spacing(4),
+        width: "80%",
+        display: "flex",
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        paddingBottom: theme.spacing(2)
+        
+    }
 });
 
 function getSteps() {

@@ -37,6 +37,7 @@ const useStyles = (theme, name) => ({
         // backgroundColor: 'red'
     },
     allForms: {
+        width: '50%'
         // backgroundColor: 'yellow'
     },
     selectEmpty: {

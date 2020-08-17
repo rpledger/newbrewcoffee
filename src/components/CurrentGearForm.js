@@ -31,10 +31,12 @@ const useStyles = (theme, name) => ({
         width: '80%',
     },
     formGroup: {
-        margin: theme.spacing(2)
+        margin: theme.spacing(2),
+        
         // backgroundColor: 'red'
     },
     allForms: {
+        width: "50%"
         // backgroundColor: 'yellow'
     },
     selectEmpty: {
@@ -93,7 +95,7 @@ class CurrentGearForm extends Component {
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
                         <Typography className={classes.title} variant="h4" noWrap>
-                            What gear do you have?
+                            Current Gear
                         </Typography>
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Scale?</InputLabel>
@@ -141,8 +143,8 @@ class CurrentGearForm extends Component {
                                 <MenuItem value={"None"}>None</MenuItem>
                                 <MenuItem value={"Blade Grinder"}>Blade Grinder</MenuItem>
                                 <MenuItem value={"Hand Burr Grinder"}>Hand Burr Grinder</MenuItem>
-                                <MenuItem value={"Electric Burr Grinder <120"}>Electric Burr Grinder under $120</MenuItem>
-                                <MenuItem value={"Electric Burr Grinder >120"}>Electric Burr Grinder over $120</MenuItem>
+                                <MenuItem value={"Electric Burr Grinder <$120"}>Electric Burr Grinder under $120</MenuItem>
+                                <MenuItem value={"Electric Burr Grinder >$120"}>Electric Burr Grinder over $120</MenuItem>
                             </Select>
                         </FormControl>
 

@@ -58,55 +58,55 @@ const brewMap = {
     "batch": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["None", "Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Batch Brewer"
     },
     "frenchPress": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "French Press"
     },
     "aeroPress": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "AeroPress"
     },
     "chemex": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Chemex"
     },
     "kalitaWave": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Kalita Wave"
     },
     "harioV60": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Hario v60"
     },
     "mokaPot": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Moka Pot"
     },
     "coldBrew": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <120", "Electric Burr Grinder >120"],
+        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
         brewerType: "Cold Brew Device"
     },
     "espressoMachine": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
         kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >120"],
+        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >$120"],
         brewerType: "Espresso Machine"
     }
 }
@@ -265,7 +265,7 @@ function grinderRec(grinder, currentBrewers, futureBrewers) {
     if ((grinder === "None" ||
         grinder === "Blade Grinder" ||
         grinder === "Hand Burr Grinder" ||
-        grinder === "Electric Burr Grinder <120")
+        grinder === "Electric Burr Grinder <$120")
         && Object.keys(currentBrewerCategories).includes("Espresso")) {
         return(
             {"rec": "Quality Burr Grinder", "description": "Since you want to make espresso, you'll need a high quality burr grinder.", "priority": 2}
@@ -283,7 +283,7 @@ function grinderRec(grinder, currentBrewers, futureBrewers) {
     }
     else if (
         grinder === "Hand Burr Grinder" ||
-        grinder === "Electric Burr Grinder <120"
+        grinder === "Electric Burr Grinder <$120"
     ) {
         return(
             {"rec": "Quality Burr Grinder", "description": "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder.", "priority": 1}
@@ -326,12 +326,14 @@ function getRecsByPriority(scale, kettle, grinder, currentBrewers, futureBrewers
 
     Object.keys(allRecs).forEach( recName => {
             let rec = allRecs[recName]
-            let priority = rec["priority"]
+            if (typeof rec !== "undefined") {
+                let priority = rec["priority"]
 
-            if (recPriorities[priority] === undefined) {
-                recPriorities[priority] = [rec]
-            } else {
-                recPriorities[priority].push(rec)
+                if (typeof recPriorities[priority] === "undefined") {
+                    recPriorities[priority] = [rec]
+                } else {
+                    recPriorities[priority].push(rec)
+                }
             }
         }
     )
