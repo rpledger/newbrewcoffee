@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         width: "300px",
-        marginRight: "12px",
+        marginRight: "15px",
+        marginLeft: "15px",
     }
 }));
 

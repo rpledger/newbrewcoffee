@@ -405,6 +405,7 @@ class Reccomendations extends Component {
         };
         this.scaleRecs = this.scaleRecs.bind(this);
         this.grinderRecs = this.grinderRecs.bind(this);
+        this.kettleRecs = this.kettleRecs.bind(this);
     }
 
     scaleRecs(scale) {
@@ -433,6 +434,54 @@ class Reccomendations extends Component {
             this.state.optionalRecs.push(rec)
         }
     }
+
+    kettleRecs(kettle, currentBrewers, futureBrewers) {
+        let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
+        console.log("current: " + currentBrewers)
+        console.log("future: " + futureBrewers)
+        console.log(currentBrewerCategories)
+    
+        if ((kettle === "None" ||
+            kettle === "Stovetop Kettle" ||
+            kettle === "Electric Kettle" ||
+            kettle === "Variable Temperature Kettle")
+            && Object.keys(currentBrewerCategories).includes("Pourover")) {
+                let brewers = currentBrewerCategories["Pourover"].join(", ")
+
+                let rec = new Rec(
+                    "Variable Temperature Eletric Gooseneck Kettle",
+                    kettle,
+                    "Since you are interested in pourover brewers (" + brewers + ") we recommend purchasing a variable temperature electric gooseneck kettle."
+                )
+                this.state.essentialRecs.push(rec)
+                // return(
+                //     {"rec": "Variable Temperature Eletric Gooseneck Kettle", "description": "Since you are interested in pourover brewers (" + brewers + ") we recommend purchasing a variable temperature electric gooseneck kettle", "priority": 2}
+                //     // <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>
+                // )
+        } else if ((kettle === "None" ||
+            kettle === "Stovetop Kettle" ||
+            kettle === "Electric Kettle")
+            && Object.keys(currentBrewerCategories).includes("Immersion")) {
+                let brewers = currentBrewerCategories["Immersion"].join(", ")
+
+                let rec = new Rec(
+                    "Variable Temperature Eletric Kettle",
+                    kettle,
+                    "Since you are interested in immersion brewers (" + brewers + ") we recommend purchasing a variable temperature electric kettle."
+                )
+                this.state.optionalRecs.push(rec)
+                // return(
+                //     {"rec": "Variable Temperature Eletric Kettle", "description": "Since you are interested in immersion brewers (" + brewers + ") we recommend purchasing a variable temperature electric kettle", "priority": 1}
+                // <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>
+                // )
+        }
+        //  else {
+        //     return (
+        //         {"rec": "Kettle", "description": "Since you already have a kettle, you're all set.", "priority": 0}
+        //         )
+        // }
+    }
+    
 
     grinderRecs(grinder, currentBrewers, futureBrewers) {
         let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
@@ -508,6 +557,7 @@ class Reccomendations extends Component {
         this.state.essentialRecs = []
         this.state.optionalRecs = []
         this.scaleRecs(this.props.scaleType)
+        this.kettleRecs(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)
         this.grinderRecs(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)
 
         return (
