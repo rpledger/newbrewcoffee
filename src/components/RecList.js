@@ -25,12 +25,11 @@ export default function RecList(props) {
     return (
     
         <div>
-            <Typography className={classes.title} variant="h5" noWrap>
+            <Typography className={classes.title} variant="h3" noWrap>
                 {props.recName}
             </Typography>
             <div className={classes.cardList}>
                 {props.recList.map( recItem => {
-                        console.log("recItem: " + recItem)
                         return (
                             <RecItem
                                 key={recItem.rec.hash}

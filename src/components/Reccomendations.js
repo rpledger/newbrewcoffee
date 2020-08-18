@@ -3,6 +3,8 @@ import {withStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import RecList from "./RecList";
 
+import Container from "@material-ui/core/Container";
+
 const useStyles = (theme, name) => ({
     root: {
         // padding: theme.spacing(10, 10),
@@ -15,6 +17,13 @@ const useStyles = (theme, name) => ({
         margin: '2% 0',
         minHeight: '200px',
         // backgroundColor: 'blue'
+    },
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+      },
+    recs: {
+        padding: theme.spacing(2, 0, 6),
     },
     formControl: {
         // margin: theme.spacing(1),
@@ -503,6 +512,16 @@ class Reccomendations extends Component {
 
         return (
             <div className={classes.root}>
+                <div className={classes.heroContent}>
+                    <Container maxWidth="sm">
+                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        Reccommendation
+                        </Typography>
+                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                            Here's some reccomendations for your current coffee gear.
+                        </Typography>
+                    </Container>
+                </div>
                 {/*<Typography className={classes.title} variant="h4" noWrap>*/}
                 {/*    Current Gear*/}
                 {/*</Typography>*/}
@@ -522,21 +541,29 @@ class Reccomendations extends Component {
                 {/*<Typography className={classes.title} variant="h4" noWrap>*/}
                 {/*    Recommendations*/}
                 {/*</Typography>*/}
-                <Typography className={classes.title} variant="h4" noWrap>
+                {/* <Typography className={classes.title} variant="h4" noWrap>
                     Recommendations
-                </Typography>
-                { this.state.essentialRecs.length !== 0 &&
-                    <RecList
-                        recName="Essential"
-                        recList={this.state.essentialRecs}
-                    />
-                }
-                { this.state.optionalRecs.length !== 0 &&
-                    <RecList
-                        recName="Optional"
-                        recList={this.state.optionalRecs}
-                    />
-                }
+                </Typography> */}
+        
+                    <Container maxWidth="sm">
+                        { this.state.essentialRecs.length !== 0 &&
+                            <div className={classes.recs}>
+                                <RecList
+                                    recName="Essential"
+                                    recList={this.state.essentialRecs}
+                                />
+                            </div>
+                        }
+                        { this.state.optionalRecs.length !== 0 &&
+                            <div className={classes.recs}>
+                                <RecList
+                                    recName="Optional"
+                                    recList={this.state.optionalRecs}
+                                />
+                            </div>
+                        }
+                    </Container>
+                {/* </div> */}
                 {/* {renderRecs(recPriorities)} */}
                 {/*<Typography className={classes.title} variant="h5" noWrap>*/}
                 {/*    Essentials*/}
