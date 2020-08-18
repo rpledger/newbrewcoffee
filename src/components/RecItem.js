@@ -11,9 +11,11 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
     },
     card: {
-        width: "300px",
+        width: "250px",
+        minHeight: "300px",
         marginRight: "15px",
         marginLeft: "15px",
+
     }
 }));
 

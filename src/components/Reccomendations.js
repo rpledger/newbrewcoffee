@@ -20,7 +20,7 @@ const useStyles = (theme, name) => ({
     },
     heroContent: {
         backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 6),
+        // padding: theme.spacing(8, 0, 6),
       },
     recs: {
         padding: theme.spacing(2, 0, 6),
@@ -406,6 +406,7 @@ class Reccomendations extends Component {
         this.scaleRecs = this.scaleRecs.bind(this);
         this.grinderRecs = this.grinderRecs.bind(this);
         this.kettleRecs = this.kettleRecs.bind(this);
+        this.coffeeRecs = this.coffeeRecs.bind(this);
     }
 
     scaleRecs(scale) {
@@ -454,10 +455,6 @@ class Reccomendations extends Component {
                     "Since you are interested in pourover brewers (" + brewers + ") we recommend purchasing a variable temperature electric gooseneck kettle."
                 )
                 this.state.essentialRecs.push(rec)
-                // return(
-                //     {"rec": "Variable Temperature Eletric Gooseneck Kettle", "description": "Since you are interested in pourover brewers (" + brewers + ") we recommend purchasing a variable temperature electric gooseneck kettle", "priority": 2}
-                //     // <p>Since you are interested in pourover brewers ({currentBrewerCategories["Pourover"].join(", ")}) we recommend purchasing a <b>variable temperature electric gooseneck kettle</b>.</p>
-                // )
         } else if ((kettle === "None" ||
             kettle === "Stovetop Kettle" ||
             kettle === "Electric Kettle")
@@ -470,16 +467,7 @@ class Reccomendations extends Component {
                     "Since you are interested in immersion brewers (" + brewers + ") we recommend purchasing a variable temperature electric kettle."
                 )
                 this.state.optionalRecs.push(rec)
-                // return(
-                //     {"rec": "Variable Temperature Eletric Kettle", "description": "Since you are interested in immersion brewers (" + brewers + ") we recommend purchasing a variable temperature electric kettle", "priority": 1}
-                // <p>Since you are interested in immersion brewers ({currentBrewerCategories["Immersion"].join(", ")}) we recommend purchasing a <b>variable temperature electric kettle</b>.</p>
-                // )
         }
-        //  else {
-        //     return (
-        //         {"rec": "Kettle", "description": "Since you already have a kettle, you're all set.", "priority": 0}
-        //         )
-        // }
     }
     
 
@@ -498,10 +486,6 @@ class Reccomendations extends Component {
                     "Since you want to make espresso, you'll need a high quality burr grinder."
                 )
                 this.state.essentialRecs.push(rec)
-            // return(
-            //     {"rec": "Quality Burr Grinder", "description": "Since you want to make espresso, you'll need a high quality burr grinder.", "priority": 2}
-            // //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
-            // )
         }
         else if (
             grinder === "None" ||
@@ -513,11 +497,6 @@ class Reccomendations extends Component {
                 "Since you don't have a burr grinder, you can upgrade to a high quality burr grinder."
             )
             this.state.essentialRecs.push(rec)
-
-            // return(
-            //     {"rec": "Quality Burr Grinder", "description": "Since you don't have a burr grinder, you can upgrade to a high quality burr grinder.", "priority": 2}
-            //     //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
-            // )
         }
         else if (
             grinder === "Hand Burr Grinder" ||
@@ -529,18 +508,40 @@ class Reccomendations extends Component {
                 "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder."
             )
             this.state.optionalRecs.push(rec)
-
-            // return(
-            //     {"rec": "Quality Burr Grinder", "description": "Since you already have a burr grinder, you can optionally upgrade to a high quality burr grinder.", "priority": 1}
-            //     //<p>We recommend purchasing a <b>Baratza grinder</b> or a <b>high quality hand grinder</b>.</p>
-            // )
         }
-        // else {
-            
-        //     return (
-        //         {"rec": "Grinder", "description": "Since you already have a high quality burr grinder, you're all set.", "priority": 0}
-        //     )
-        // }
+    }
+
+    coffeeRecs(beans) {
+        if (
+            beans === "None" ||
+            beans === "Store-Bought Pre-Ground"
+        ) {
+            let rec = new Rec(
+                "Whole Beans",
+                beans,
+                "Since you currently purchase store-bought pre-ground beans, we reccommend you buy whole beans from a store or local coffee shop."
+            )
+            this.state.essentialRecs.push(rec)
+        } else if (
+            beans === "Store-Bought Whole Bean"
+        ) {
+            let rec = new Rec(
+                "Local Coffee Shop Whole Beans",
+                beans,
+                "Since you currently purchase store-bought whole beans, we reccommend you buy whole beans local coffee shop because they are typically more recently roasted."
+            )
+            this.state.optionalRecs.push(rec)
+        }
+        else if (
+            beans === "Local Coffee Shop Pre-Ground"
+        ) {
+            let rec = new Rec(
+                "Local Coffee Shop Whole Beans",
+                beans,
+                "Since you currently purchase local coffee shop pre-ground beans, we reccommend you buy whole beans local coffee shop because your coffee will be much more flavorful if you grind it right before brewing."
+            )
+            this.state.optionalRecs.push(rec)
+        }
     }
 
     render() {
@@ -559,6 +560,7 @@ class Reccomendations extends Component {
         this.scaleRecs(this.props.scaleType)
         this.kettleRecs(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)
         this.grinderRecs(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)
+        this.coffeeRecs(this.props.coffeeBeanType)
 
         return (
             <div className={classes.root}>

@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import Input from '@material-ui/core/Input';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import Container from '@material-ui/core/Container';
 
 import Stepper from "./CoffeeForm";
 import CurrentGearForm from "./CurrentGearForm";
@@ -103,11 +104,21 @@ class CoffeeGoalsForm extends Component {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
+                <div className={classes.heroContent}>
+                    <Container maxWidth="sm">
+                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                        Coffee Dreams
+                        </Typography>
+                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                            Tell us some info about what your coffee goals.
+                        </Typography>
+                    </Container>
+                </div>
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
-                        <Typography className={classes.title} variant="h4" noWrap>
+                        {/* <Typography className={classes.title} variant="h4" noWrap>
                             What are your coffee dreams?
-                        </Typography>
+                        </Typography> */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Primary Goal</InputLabel>
                             <Select
