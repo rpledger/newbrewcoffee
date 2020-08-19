@@ -414,7 +414,7 @@ class Reccomendations extends Component {
             let rec = new Rec(
                 "Tenth of a Gram Scale",
                 scale,
-                "Since you don't have a scale, we suggest purchasing a tenth of a gram scale."
+                "Since you don't have a scale, we suggest purchasing a tenth of a gram scale. Using a scale to measure your coffee grounds and brew water when making coffee will help you improve your consistency and accuracy."
             )
             this.state.essentialRecs.push(rec)
         }

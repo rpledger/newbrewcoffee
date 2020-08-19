@@ -6,6 +6,8 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+
 import CurrentGearForm from "./CurrentGearForm";
 import CurrentRoutineForm from "./CurrentRoutineForm";
 import CoffeeGoalsForm from "./CoffeeGoalsForm";
@@ -33,6 +35,9 @@ const theme = createMuiTheme({
 const useStyles = (theme) => ({
     root: {
         width: '100%'
+    },
+    outerContainer: {
+        marginTop: theme.spacing(3)
     },
     button: {
         marginRight: theme.spacing(1),
@@ -199,6 +204,7 @@ class CoffeeForm extends Component {
         const steps = getSteps()
         return (
             <div className={classes.root}>
+                <Container maxWidth="md" className={classes.outerContainer}>
                 <Stepper activeStep={this.state.activeStep}>
                     {steps.map((label, index) => {
                         const stepProps = {};
@@ -216,6 +222,7 @@ class CoffeeForm extends Component {
                         );
                     })}
                 </Stepper>
+                
                 <div>
                     {this.state.activeStep === steps.length ? (
                         <div>
@@ -271,6 +278,7 @@ class CoffeeForm extends Component {
                         </div>
                     )}
                 </div>
+                </Container>
             </div>
         );
     }
