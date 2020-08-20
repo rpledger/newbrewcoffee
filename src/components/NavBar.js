@@ -15,7 +15,7 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             light: '#a5a58d',
-            main: '#29524A',
+            main: '#364958',
             dark: '#870000',
             contrastText: '#ffffff',
         },
@@ -104,7 +104,7 @@ export default function NavBar() {
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Coffee Gear 101
+                        NewBrew Coffee
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
