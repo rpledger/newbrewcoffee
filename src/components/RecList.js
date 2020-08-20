@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        // width: '60%',
         textAlign: 'center',
         margin: '2% 0',
     }
@@ -21,9 +20,7 @@ const useStyles = makeStyles((theme) => ({
 export default function RecList(props) {
     const classes = useStyles();
 
-    console.log("recList: " + props.recList)
     return (
-    
         <div>
             <Typography className={classes.title} variant="h3" noWrap>
                 {props.recName}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {withStyles} from "@material-ui/core/styles";
-import Paper from '@material-ui/core/Paper';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -11,35 +10,25 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import Container from '@material-ui/core/Container';
 
-import Stepper from "./CoffeeForm";
-import CurrentGearForm from "./CurrentGearForm";
-
 
 const useStyles = (theme, name) => ({
     root: {
-        // padding: theme.spacing(10, 10),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column',
-        // width: '60%',
         textAlign: 'center',
         margin: '5% 0',
         minHeight: '200px',
-        // backgroundColor: 'blue'
     },
     formControl: {
-        // margin: theme.spacing(1),
-        // minWidth: 120,
         width: '80%',
     },
     formGroup: {
         margin: theme.spacing(2)
-        // backgroundColor: 'red'
     },
     allForms: {
         width: "50%"
-        // backgroundColor: 'yellow'
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
@@ -81,24 +70,8 @@ const goalNames = [
 class CoffeeGoalsForm extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            scaleType: "",
-            kettleType: "",
-            grinderType: "",
-            brewerType: "",
-            coffeeBeanType: "",
-            timeOfDay: "",
-            numOfDrinkers: "",
-            cupsPerPerson: "",
-            goals: [],
-            brewerNames: [],
-            futureBrewerNames: []
-        };
+        this.state = {};
     }
-
-    // handleChange(e) {
-    //     this.setState({ [e.target.name] : e.target.value });
-    // }
 
     render() {
         const { classes } = this.props;
@@ -116,9 +89,6 @@ class CoffeeGoalsForm extends Component {
                 </div>
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
-                        {/* <Typography className={classes.title} variant="h4" noWrap>
-                            What are your coffee dreams?
-                        </Typography> */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Primary Goal</InputLabel>
                             <Select

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import {withStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -19,7 +18,7 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             light: '#f7ede2',
-            main: '#bf360c',
+            main: '#5EC2B7',
             dark: '#870000',
             contrastText: '#ffffff',
         },
@@ -34,10 +33,14 @@ const theme = createMuiTheme({
 
 const useStyles = (theme) => ({
     root: {
-        width: '100%'
+        width: '100%',
     },
     outerContainer: {
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3),
+        
+    },
+    stepper: {
+        marginTop: theme.spacing(3),
     },
     button: {
         marginRight: theme.spacing(1),
@@ -106,7 +109,7 @@ class CoffeeForm extends Component {
     }
 
     isStepOptional(step) {
-        //return step === 1;
+        // no optional steps, leaving here if I need it in the future
     };
 
     isStepSkipped(step) {
@@ -205,7 +208,7 @@ class CoffeeForm extends Component {
         return (
             <div className={classes.root}>
                 <Container maxWidth="md" className={classes.outerContainer}>
-                <Stepper activeStep={this.state.activeStep}>
+                <Stepper className={classes.stepper} activeStep={this.state.activeStep}>
                     {steps.map((label, index) => {
                         const stepProps = {};
                         const labelProps = {};
@@ -236,18 +239,12 @@ class CoffeeForm extends Component {
                                 secondaryGoal={this.state.secondaryGoal}
                                 futureBrewerNames={this.state.futureBrewerNames}
                             />
-                            {/*<Typography className={classes.instructions}>*/}
-                            {/*    All steps completed - you&apos;re finished*/}
-                            {/*</Typography>*/}
                             <Button onClick={this.handleReset} className={classes.button}>
                                 Reset
                             </Button>
                         </div>
                     ) : (
                         <div>
-                            {/*<Typography className={classes.instructions}>*/}
-                            {/*    Hello*/}
-                            {/*</Typography>*/}
                             <div>
                                 {this.getStepContent(this.state.activeStep)}
                             </div>
