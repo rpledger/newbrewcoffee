@@ -32,33 +32,13 @@ const useStyles = (theme, name) => ({
     },
 });
 
-const brewerNames = [
-    'Batch Brewer',
-    'French Press',
-    'AeroPress',
-    'Chemex',
-    'Kalita Wave',
-    'Hario v60',
-    'Moka Pot',
-    'Cold Brew Device',
-    'Espresso Machine'
-];
-
-const goalNames = [
-    'Entry Level Coffee Starter Gear',
-    'Brew More Coffee at Once',
-    'Brew Higher Quality Coffee',
-    'Upgrade My Current Gear',
-    'Buy it for Life Gear',
-    'Explore New Coffee Techniques'
-];
-
 class CurrentRoutineForm extends Component {
     constructor(props){
         super(props);
         this.state = {};
     }
 
+    // TODO: This step may go away or get merged with step 1 (current gear)
     render() {
         const { classes } = this.props;
         return (
@@ -73,6 +53,7 @@ class CurrentRoutineForm extends Component {
                         </Typography>
                     </Container>
                 </div>
+                {/* NONE OF THESE FIELDS DO ANYTHING RIGHT NOW */}
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
                         <FormControl className={classes.formControl}>

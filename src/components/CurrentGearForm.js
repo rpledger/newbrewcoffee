@@ -57,15 +57,6 @@ const brewerNames = [
     'Espresso Machine'
 ];
 
-const goalNames = [
-    'Entry Level Coffee Starter Gear',
-    'Brew More Coffee at Once',
-    'Brew Higher Quality Coffee',
-    'Upgrade My Current Gear',
-    'Buy it for Life Gear',
-    'Explore New Coffee Techniques'
-];
-
 class CurrentGearForm extends Component {
     constructor(props){
         super(props);
@@ -88,9 +79,6 @@ class CurrentGearForm extends Component {
                 </div>
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
-                        {/* <Typography className={classes.title} variant="h4" noWrap>
-                            Current Gear
-                        </Typography> */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Scale?</InputLabel>
 

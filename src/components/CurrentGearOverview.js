@@ -29,6 +29,8 @@ const useStyles = (theme, name) => ({
     }
 });
 
+// TODO: Refactor this out to somewhere more static.
+// For each brewer type, what are the minimun required gear options
 const brewMap = {
     "batch": {
         scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
@@ -98,24 +100,14 @@ const brewTypes = [
     "espressoMachine"
 ]
 
-const brewerCategories = {
-    "Batch": "Batch",
-    "French Press": "Immersion",
-    "AeroPress": "Immersion",
-    "Chemex": "Pourover",
-    "Kalita Wave": "Pourover",
-    "Hario v60": "Pourover",
-    "Moka Pot": "Stovetop Brewer",
-    "Cold Brew Device": "Cold Brew",
-    "Espresso Machine": "Espresso"
-}
-
+// Check for whether user has no grinder, but they buy pre-ground coffee (except for espresso)
 function noGrinderPreGround(brewerType, grinder, coffeeType) {
     return (grinder === "None" && (
         ((brewerType !== "espressoMachine") && (coffeeType === "Store-Bought Pre-Ground")) ||
         coffeeType === "Local Coffee Shop Pre-Ground" ))
 }
 
+// With the given form inputs, does the user have enough gear to brew w/ this brewer type
 function canBrew(type, scale, kettle, grinder, brewerType, coffeeType) {
     if(
         brewMap[type].scale.includes(scale) &&
@@ -133,6 +125,8 @@ class CurrentGearOverview extends Component {
         this.state = {};
     }
 
+    // TODO: This step may or may not stay. If it does, it needs
+    //       to be changed to match styling of the other steps.
     render() {
         const { classes } = this.props;
         return (

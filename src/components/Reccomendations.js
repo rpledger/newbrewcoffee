@@ -36,75 +36,6 @@ const useStyles = (theme, name) => ({
     }
 });
 
-const brewMap = {
-    "batch": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["None", "Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Batch Brewer"
-    },
-    "frenchPress": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "French Press"
-    },
-    "aeroPress": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "AeroPress"
-    },
-    "chemex": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Chemex"
-    },
-    "kalitaWave": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Kalita Wave"
-    },
-    "harioV60": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Hario v60"
-    },
-    "mokaPot": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Moka Pot"
-    },
-    "coldBrew": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Blade Grinder", "Hand Burr Grinder", "Electric Burr Grinder <$120", "Electric Burr Grinder >$120"],
-        brewerType: "Cold Brew Device"
-    },
-    "espressoMachine": {
-        scale: ["None", "Kitchen Scale", "Tenth of a Gram Scale"],
-        kettle: ["Stovetop Kettle", "Electric Kettle", "Variable Temperature Kettle", "Stovetop Gooseneck Kettle", "Electric Gooseneck Kettle"],
-        grinder: ["Hand Burr Grinder", "Electric Burr Grinder >$120"],
-        brewerType: "Espresso Machine"
-    }
-}
-
-const brewTypes = [
-    "batch",
-    "frenchPress",
-    "aeroPress",
-    "chemex",
-    "kalitaWave",
-    "harioV60",
-    "mokaPot",
-    "coldBrew",
-    "espressoMachine"
-]
-
 const brewerCategories = {
     "Batch": "Batch",
     "French Press": "Immersion",
@@ -117,81 +48,7 @@ const brewerCategories = {
     "Espresso Machine": "Espresso"
 }
 
-const scaleRecTextLong = `
-Ensuring that you always use a brew ratio of around 1:16 coffee to water will improve your coffee's taste,
-and consistency from cup to cup. Using a scale when brewing coffee will provide this consistency and accuracy.
-Since coffee beans are not very heavy, many recommend using a scale with that weighs to a tenth of a gram.
-However, if you are just starting out, a standard kitchen scale will work just fine!
-`;
-
-const scaleRecText = `
-Using a scale when brewing coffee will provide consistency and accuracy.
-A scale will allow you to brew with an exact ratio of coffee to water.
-Since coffee beans are light, many recommend using a scale that weighs to a tenth of a gram.
-However, if you are just starting out, a standard kitchen scale will work just fine!
-`;
-
-const kettleRecTextLong = `
-The magic recipe for coffee consists of just ground coffee and hot water (unless your making cold brew!). The right hot water kettle makes it easy
-to heat up water to the ideal temperature for brewing coffee (around 205-210 degrees F). Many traditional stovetop or electric kettles don't allow
-you to set a specific temperature to heat the water to. If you have of these kettles, it is recommended to heat the water to a boil and then wait
-30 seconds before brewing. However, using a variable temperature electric kettle will allow you to brew at a more precise temperature.
-Some methods of brewing, including pourover (e.g. Chemex, Hario v60, Kalita Wave)
-will also benefit from using a kettle with a gooseneck spout that allows you to control the speed and flow rate of your pour.
-`;
-
-const kettleRecText = `
-The ideal temperature for brewing coffee is around 205-210 degrees F.
-A variable temperature electric kettle allows you to set the temperature to heat the water to.
-Pourovers will also benefit from using a kettle with a gooseneck spout which allows you to control the speed and flow rate of your pour.
-`;
-
-const grinderRecTextLong = `
-Grinders are the most import part of brewing coffee. If you are going to spend more money on one thing it should be
-the grinder. There are two main categories of grinders: blade grinders and burr grinders. A burr grinder is essential 
-to brewing great coffee because it grinds the beans to a much more uniform size than a blade grinder. A quality burr 
-grinder will start at around $150, however if that is more than your budget allows, you can also purchase a hand burr
-grinder. Many hand burr grinders less expensive than their electric counterparts, however hand grinding coffee can become
-tiresome.
-`
-
-const grinderRecText = `
-A burr grinder is essential to brewing great coffee because it grinds the beans to a more uniform size than a blade grinder.
-A quality burr grinder will start at around $150. However, a cheaper alternative is to purchase a hand burr
-grinder. While they are less expensive, hand grinding coffee can become tiresome.
-`
-
-const beansRecTextLong = `
-You can't make good coffee without good coffee beans! In an ideal scenario, you should always buy whole coffee and grind
-right before brewing. The best way to get great beans is to visit your local coffee shop.
-Ask your local barista what they recommend for what brewing device you are using. After coffee is roasted, it begins
-
-Another thing to consider when you buy coffee beans, is when the coffee was roasted. You'll get the best flavor out of
-your coffee if you buy it within two weeks of when it was roasted. Most reputable roaster will put the roasting date on
-the bag.
-
-If you don't have a grinder at home, you'll need to purchase pre-ground beans
-from the store or a coffee shop. However, the longer coffee sits after it's been ground,
-the more yummy flavors will be lost. Pre-ground coffee purchased at a grocery store, will likely have been sitting on
-the shelf for a while before it is purchased. If you don't have a grinder, we recommend buying coffee at a local coffee shop
-and have them grind it appropriately for what ever brewer you'll be using. 
-`
-
-const beansRecText = `
-Coffee will taste it's best if you buy it within two weeks of when it was roasted and if you grind it right before brewing.
-The best way to get great beans is to visit your local coffee shop and ask the barista what they recommend for your brewing device.
-`
-
-const priorities = ["No Recommendation", "Optional Upgrade", "Essential"]
-
-class Rec {
-    constructor(rec, current, description) {
-      this.rec = rec;
-      this.current = current;
-      this.description = description;
-    }
-  }
-
+// For all current and future brewers, get a list of the brewer categories (ex: Pourover, Immersion...)
 function getBrewerCategories(currentBrewers, futureBrewers) {
     let currentBrewerCategories = {}
     if (typeof currentBrewers !== "object") currentBrewers = Array.from(currentBrewers)
@@ -210,6 +67,14 @@ function getBrewerCategories(currentBrewers, futureBrewers) {
     return currentBrewerCategories
 }
 
+class Rec {
+    constructor(rec, current, description) {
+      this.rec = rec;
+      this.current = current;
+      this.description = description;
+    }
+  }
+
 class Reccomendations extends Component {
     constructor(props){
         super(props);
@@ -223,6 +88,9 @@ class Reccomendations extends Component {
         this.coffeeRecs = this.coffeeRecs.bind(this);
     }
 
+    // TODO: These rec functions are super messy, figure out how to make them nicer
+
+    // Get Scale Recommendations for form inputs, and push them onto essential and optional rec lists
     scaleRecs(scale) {
         if(scale === "None") {
             let rec = new Rec(
@@ -250,6 +118,7 @@ class Reccomendations extends Component {
         }
     }
 
+    // Get Kettle Recommendations for form inputs, and push them onto essential and optional rec lists
     kettleRecs(kettle, currentBrewers, futureBrewers) {
         let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
     
@@ -281,7 +150,7 @@ class Reccomendations extends Component {
         }
     }
     
-
+    // Get Grinder Recommendations for form inputs, and push them onto essential and optional rec lists
     grinderRecs(grinder, currentBrewers, futureBrewers) {
         let currentBrewerCategories = getBrewerCategories( currentBrewers, futureBrewers)
         console.log("Grinder: " + grinder)
@@ -322,6 +191,7 @@ class Reccomendations extends Component {
         }
     }
 
+    // Get Coffee bean Recommendations for form inputs, and push them onto essential and optional rec lists
     coffeeRecs(beans) {
         if (
             beans === "None" ||
@@ -358,8 +228,10 @@ class Reccomendations extends Component {
     render() {
         const { classes } = this.props;
 
+        // Clear the rec lists when we render the recs page
         this.state.essentialRecs = []
         this.state.optionalRecs = []
+        // Get all the recs from input form fields and add results to the Rec lists above
         this.scaleRecs(this.props.scaleType)
         this.kettleRecs(this.props.kettleType, this.props.brewerTypes, this.props.futureBrewerNames)
         this.grinderRecs(this.props.grinderType, this.props.brewerTypes, this.props.futureBrewerNames)

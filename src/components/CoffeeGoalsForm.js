@@ -46,6 +46,7 @@ const MenuProps = {
     },
 };
 
+// TODO: Refactor this out to somewhere static because it is used in a few files
 const brewerNames = [
     'Batch Brewer',
     'French Press',
@@ -58,6 +59,7 @@ const brewerNames = [
     'Espresso Machine'
 ];
 
+// TODO: Refactor this out to somewhere static because it is used in a few files
 const goalNames = [
     'Entry Level Coffee Starter Gear',
     'Brew More Coffee at Once',
@@ -89,6 +91,7 @@ class CoffeeGoalsForm extends Component {
                 </div>
                 <div className={classes.allForms}>
                     <div className={classes.formGroup}>
+                        {/* DOES NOTHING RIGHT NOW */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Primary Goal</InputLabel>
                             <Select
@@ -108,6 +111,7 @@ class CoffeeGoalsForm extends Component {
                             </Select>
                         </FormControl>
 
+                        {/* DOES NOTHING RIGHT NOW */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-simple-select-label">Optional Secondary Goal</InputLabel>
                             <Select
@@ -127,6 +131,7 @@ class CoffeeGoalsForm extends Component {
                             </Select>
                         </FormControl>
 
+                        {/* Only this form field actually does anything on this page */}
                         <FormControl className={classes.formControl}>
                             <InputLabel id="demo-mutiple-checkbox-label">Brewers?</InputLabel>
                             <Select
